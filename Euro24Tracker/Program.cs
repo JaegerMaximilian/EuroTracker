@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Euro24Tracker.Data;
+using System.Text.Json.Serialization;
 namespace Euro24Tracker
 {
     public class Program
@@ -14,6 +15,20 @@ namespace Euro24Tracker
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            // API GENERATION SWAGGER (MIT NUGGET PACKAGE)
+
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
+
+            builder.Services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+                options.JsonSerializerOptions.WriteIndented = true;
+            });
+
+
+            // END API
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -23,6 +38,13 @@ namespace Euro24Tracker
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            // API
+
+            app.UseSwagger();
+            app.UseSwaggerUI();
+
+            // END EPI
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -36,6 +58,7 @@ namespace Euro24Tracker
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
+
         }
     }
 }

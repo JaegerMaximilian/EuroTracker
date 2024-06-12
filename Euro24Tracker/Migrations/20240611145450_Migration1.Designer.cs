@@ -2,6 +2,7 @@
 using Euro24Tracker.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Euro24Tracker.Migrations
 {
     [DbContext(typeof(Euro24TrackerContext))]
-    partial class Euro24TrackerContextModelSnapshot : ModelSnapshot
+    [Migration("20240611145450_Migration1")]
+    partial class Migration1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.0-preview.4.24267.1");
@@ -155,7 +158,7 @@ namespace Euro24Tracker.Migrations
 
                     b.HasIndex("NationId");
 
-                    b.ToTable("SpielNation");
+                    b.ToTable("SpielNationen");
                 });
 
             modelBuilder.Entity("Euro24Tracker.Types.Ereignis", b =>
@@ -193,13 +196,13 @@ namespace Euro24Tracker.Migrations
             modelBuilder.Entity("Euro24Tracker.Types.SpielNation", b =>
                 {
                     b.HasOne("Euro24Tracker.Types.Nation", "Nation")
-                        .WithMany()
+                        .WithMany("SpieleNation")
                         .HasForeignKey("NationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Euro24Tracker.Types.Spiel", "Spiel")
-                        .WithMany()
+                        .WithMany("SpielNationen")
                         .HasForeignKey("SpielId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -221,12 +224,16 @@ namespace Euro24Tracker.Migrations
 
             modelBuilder.Entity("Euro24Tracker.Types.Nation", b =>
                 {
+                    b.Navigation("SpieleNation");
+
                     b.Navigation("TorEreginisse");
                 });
 
             modelBuilder.Entity("Euro24Tracker.Types.Spiel", b =>
                 {
                     b.Navigation("Ereignisse");
+
+                    b.Navigation("SpielNationen");
                 });
 #pragma warning restore 612, 618
         }

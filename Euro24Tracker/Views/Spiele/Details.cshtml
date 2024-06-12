@@ -1,0 +1,36 @@
+﻿@model Euro24Tracker.Types.Spiel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Spiel</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Stadion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Stadion)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Gruppenphase)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Gruppenphase)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Nationen)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nationen)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

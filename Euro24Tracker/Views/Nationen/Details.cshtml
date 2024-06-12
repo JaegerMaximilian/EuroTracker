@@ -1,0 +1,66 @@
+﻿@model Euro24Tracker.Types.Nation
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Nation</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ShortName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ShortName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LogoLink)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LogoLink)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Punkte)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Punkte)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Tore)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Tore)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Gegentore)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Gegentore)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Torverhältnis)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Torverhältnis)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Gruppe)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Gruppe.Id)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

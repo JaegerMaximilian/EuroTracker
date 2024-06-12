@@ -16,11 +16,11 @@ namespace Euro24Tracker.Data
 
        // public DbSet<Euro24Tracker.Types.Nation> Nation { get; set; } = default!;
 
-        public DbSet<Nation> Nationen { get; set; }
-        public DbSet<Gruppe> Gruppen { get; set; }
-        public DbSet<Spiel> Spiele { get; set; }
-        public DbSet<Ereignis> Ereignisse { get; set; }
-        public DbSet<SpielNation> SpielNationen { get; set; }
+        public DbSet<Euro24Tracker.Types.Nation> Nationen { get; set; }
+        public DbSet<Euro24Tracker.Types.Gruppe> Gruppen { get; set; }
+        public DbSet<Euro24Tracker.Types.Spiel> Spiele { get; set; }
+        public DbSet<Euro24Tracker.Types.Ereignis> Ereignisse { get; set; }
+        public DbSet<Euro24Tracker.Types.SpielNation> SpielNation { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -34,15 +34,10 @@ namespace Euro24Tracker.Data
             modelBuilder.Entity<SpielNation>()
                 .HasKey(sn => new { sn.SpielId, sn.NationId });
 
-            modelBuilder.Entity<SpielNation>()
-                .HasOne(sn => sn.Spiel)
-                .WithMany(s => s.SpielNationen)
-                .HasForeignKey(sn => sn.SpielId);
-
-            modelBuilder.Entity<SpielNation>()
-                .HasOne(sn => sn.Nation)
-                .WithMany(n => n.SpieleNation)
-                .HasForeignKey(sn => sn.NationId);
+            modelBuilder.Entity<Spiel>()
+              .HasMany(e => e.Nationen)
+              .WithMany(e => e.Spiele)
+              .UsingEntity<SpielNation>();
 
             // 1:n Beziehung zwischen Spiel und Ereignis
             modelBuilder.Entity<Ereignis>()
@@ -56,5 +51,6 @@ namespace Euro24Tracker.Data
                 .WithMany(s => s.Ereignisse)
                 .HasForeignKey(e => e.EreignisTypId);
         }
+        public DbSet<Euro24Tracker.Types.EreignisTyp> EreignisTyp { get; set; } = default!;
     }
 }

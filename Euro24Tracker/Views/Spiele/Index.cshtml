@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Euro24Tracker.Types.Spiel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Stadion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gruppenphase)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stadion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gruppenphase)
+            </td>
+            <td>
+                @foreach (var item2 in item.Nationen.ToArray())
+                {
+
+                    @Html.DisplayFor(modelItem2 => item2.ShortName)
+                    <span>  </span>
+                }
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

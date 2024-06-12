@@ -1,0 +1,71 @@
+﻿@model Euro24Tracker.Types.Spiel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Spiel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Stadion" class="control-label"></label>
+                <input asp-for="Stadion" class="form-control" />
+                <span asp-validation-for="Stadion" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Gruppenphase" /> @Html.DisplayNameFor(model => model.Gruppenphase)
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Nationen</label>
+                <select name="SelectedNationendIds" multiple class="form-control">
+                    @if (ViewBag.Nationen != null)
+                    {
+                        @foreach (var nation in ViewBag.Nationen)
+                        {
+                            bool found = false;
+                            foreach (var spielnation in ViewBag.SpielNation)
+                            {
+                                if (Model.Id.ToString() == spielnation.Value && spielnation.Text == nation.Value)
+                                {
+                                    found = true;
+                                }
+                            }
+
+                            if (found)
+                            {
+                                <option value="@nation.Value" selected>@nation.Text</option>
+                                found = false;
+                            }
+                            else
+                            {
+                                <option value="@nation.Value">@nation.Text</option>
+                            }
+                        }
+                    }
+                   
+                </select>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

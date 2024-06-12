@@ -10,22 +10,23 @@ using Euro24Tracker.Types;
 
 namespace Euro24Tracker.Controllers
 {
-    public class NationsController : Controller
+    public class NationenController : Controller
     {
         private readonly Euro24TrackerContext _context;
 
-        public NationsController(Euro24TrackerContext context)
+        public NationenController(Euro24TrackerContext context)
         {
             _context = context;
         }
 
-        // GET: Nations
+        // GET: Nationen
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Nation.ToListAsync());
+            var euro24TrackerContext = _context.Nationen.Include(n => n.Gruppe);
+            return View(await euro24TrackerContext.ToListAsync());
         }
 
-        // GET: Nations/Details/5
+        // GET: Nationen/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,7 +34,8 @@ namespace Euro24Tracker.Controllers
                 return NotFound();
             }
 
-            var nation = await _context.Nation
+            var nation = await _context.Nationen
+                .Include(n => n.Gruppe)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (nation == null)
             {
@@ -43,18 +45,19 @@ namespace Euro24Tracker.Controllers
             return View(nation);
         }
 
-        // GET: Nations/Create
+        // GET: Nationen/Create
         public IActionResult Create()
         {
+            ViewData["GruppeId"] = new SelectList(_context.Gruppen, "Id", "Id");
             return View();
         }
 
-        // POST: Nations/Create
+        // POST: Nationen/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ShortName,Name,LogoLink")] Nation nation)
+        public async Task<IActionResult> Create([Bind("Id,ShortName,Name,LogoLink,Punkte,Tore,Gegentore,Torverhältnis,GruppeId")] Nation nation)
         {
             if (ModelState.IsValid)
             {
@@ -62,10 +65,11 @@ namespace Euro24Tracker.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["GruppeId"] = new SelectList(_context.Gruppen, "Id", "Id", nation.GruppeId);
             return View(nation);
         }
 
-        // GET: Nations/Edit/5
+        // GET: Nationen/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,20 +77,21 @@ namespace Euro24Tracker.Controllers
                 return NotFound();
             }
 
-            var nation = await _context.Nation.FindAsync(id);
+            var nation = await _context.Nationen.FindAsync(id);
             if (nation == null)
             {
                 return NotFound();
             }
+            ViewData["GruppeId"] = new SelectList(_context.Gruppen, "Id", "Id", nation.GruppeId);
             return View(nation);
         }
 
-        // POST: Nations/Edit/5
+        // POST: Nationen/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ShortName,Name,LogoLink")] Nation nation)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ShortName,Name,LogoLink,Punkte,Tore,Gegentore,Torverhältnis,GruppeId")] Nation nation)
         {
             if (id != nation.Id)
             {
@@ -113,10 +118,11 @@ namespace Euro24Tracker.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["GruppeId"] = new SelectList(_context.Gruppen, "Id", "Id", nation.GruppeId);
             return View(nation);
         }
 
-        // GET: Nations/Delete/5
+        // GET: Nationen/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,7 +130,8 @@ namespace Euro24Tracker.Controllers
                 return NotFound();
             }
 
-            var nation = await _context.Nation
+            var nation = await _context.Nationen
+                .Include(n => n.Gruppe)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (nation == null)
             {
@@ -134,15 +141,15 @@ namespace Euro24Tracker.Controllers
             return View(nation);
         }
 
-        // POST: Nations/Delete/5
+        // POST: Nationen/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var nation = await _context.Nation.FindAsync(id);
+            var nation = await _context.Nationen.FindAsync(id);
             if (nation != null)
             {
-                _context.Nation.Remove(nation);
+                _context.Nationen.Remove(nation);
             }
 
             await _context.SaveChangesAsync();
@@ -151,7 +158,7 @@ namespace Euro24Tracker.Controllers
 
         private bool NationExists(int id)
         {
-            return _context.Nation.Any(e => e.Id == id);
+            return _context.Nationen.Any(e => e.Id == id);
         }
     }
 }

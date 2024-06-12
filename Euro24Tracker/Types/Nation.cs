@@ -22,7 +22,7 @@ namespace Euro24Tracker.Types
         public Gruppe? Gruppe { get; set; }
 
         public ICollection<Ereignis>? TorEreginisse { get; set; }
-        public ICollection<SpielNation>? SpieleNation { get; set; }
+        public ICollection<Spiel>? Spiele { get; set; }
 
 
 
