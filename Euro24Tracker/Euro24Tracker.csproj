@@ -22,4 +22,8 @@
     <Folder Include="Migrations\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="EURO2024App\EURO2024App.csproj" />
+  </ItemGroup>
+
 </Project>

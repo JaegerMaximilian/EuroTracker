@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using System.Net.Http.Json;
+using Newtonsoft.Json;
+using Euro24Tracker.Types;
 
 namespace EURO2024App.Services
 {
@@ -19,15 +23,29 @@ namespace EURO2024App.Services
 
         List<Spiel> gameList;
 
-        public async Task<List<Spiel>> GetGames()
+        public async Task<List<Spiel>> GetSpiele()
         {
             // Offline
             using var stream = await FileSystem.OpenAppPackageFileAsync("monkeydata.json");
             using var reader = new StreamReader(stream);
             var contents = await reader.ReadToEndAsync();
+            
             gameList = JsonSerializer.Deserialize(contents, SpielContext.Default.ListSpiel);
 
             return gameList;
         }
+
+        //public async Task<List<Spiel>> GetGruppen()
+        //{
+        //    // Offline
+        //    using var stream = await FileSystem.OpenAppPackageFileAsync("monkeydata.json");
+        //    using var reader = new StreamReader(stream);
+        //    var contents = await reader.ReadToEndAsync();
+
+        //    gameList = JsonSerializer.Deserialize(contents, GruppeContext.Default.ListSpiel);
+
+        //    //List<Spiel> spiele = JsonConvert
+        //    return gameList;
+        //}
     }
 }
