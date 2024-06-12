@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EURO2024App.View.StadiumPage"
+             xmlns:model="clr-namespace:EURO2024App.Model">
+
+    <CollectionView>
+        
+        <CollectionView.ItemsSource>
+            <x:Array Type="{x:Type model:Stadium}">
+                <model:Stadium
+                       Name="Olympiastadion Berlin"
+                       Club="Berlin"
+                       Image="berlin.jpg"
+                       Capacity="70.000" />
+                <model:Stadium
+                       Name="Munich Football Arena"
+                       Club="Munich"
+                       Image="munich.jpg"
+                       Capacity="67.000" />
+                <model:Stadium
+                       Name="Cologne Stadium"
+                       Club="Cologne"
+                       Image="cologne.jpg"
+                       Capacity="47.000" />
+                <model:Stadium
+                       Name="Frankfurt Arena"
+                       Club="Frankfurt"
+                       Image="frankfurt.jpg"
+                       Capacity="48.000" />
+                <model:Stadium
+                       Name="Volksparkstadion Hamburg"
+                       Club="Hamburg"
+                       Image="hamburg.jpg"
+                       Capacity="50.000" />
+                <model:Stadium
+                       Name="BVB Stadion Dortmund"
+                       Club="Dortmund"
+                       Image="dortmund.jpg"
+                       Capacity="66.000" />
+                <model:Stadium
+                       Name="Arena Aufschalke"
+                       Club="Gelsenkirchen"
+                       Image="gelsenkirchen.jpg"
+                       Capacity="50.000" />
+                <model:Stadium
+                       Name="Leipzig Stadium"
+                       Club="Leipzig"
+                       Image="leipzig.jpg"
+                       Capacity="42.000" />
+                <model:Stadium
+                       Name="Stuttgart Arena"
+                       Club="Stuttgart"
+                       Image="stuttgart.jpg"
+                       Capacity="54.000" />
+                <model:Stadium
+                       Name="Düsseldorf Arena"
+                       Club="Düsseldorf"
+                       Image="duesseldorf.jpg"
+                       Capacity="47.000" />
+            </x:Array>
+        </CollectionView.ItemsSource>
+        
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="model:Stadium">
+                <HorizontalStackLayout Padding="10">
+                    <Image
+                         Aspect="AspectFit"
+                         HeightRequest="100"
+                         Source="{Binding Image}"
+                         WidthRequest="200" />
+                    <VerticalStackLayout VerticalOptions="Center">
+                        <Label Text="{Binding Name}" FontSize="24" TextColor="Gray"/>
+                        <Label Text="{Binding Club}" FontSize="18" TextColor="Gray"/>
+                        <Label Text="{Binding Capacity}" FontSize="18" TextColor="Gray"/>
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+
+    </CollectionView>
+        
+    
+    
+
+</ContentPage>
