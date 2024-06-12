@@ -2,11 +2,14 @@
 using EURO2024App.View;
 using EURO2024App.ViewModels;
 using Microsoft.Extensions.Logging;
+using EURO2024App.Services;
 
 namespace EURO2024App
 {
+    
     public static class MauiProgram
     {
+        
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();

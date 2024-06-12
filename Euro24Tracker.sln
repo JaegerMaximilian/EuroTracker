@@ -5,7 +5,7 @@ VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Euro24Tracker", "Euro24Tracker\Euro24Tracker.csproj", "{BA0DA38B-4D4E-4FA3-AE7E-3B14358D1B62}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EURO2024App", "Euro24Tracker\EURO2024App\EURO2024App.csproj", "{90D24E5B-15F5-4B7D-9C49-86531FE6066D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EURO2024App", "EURO2024App\EURO2024App.csproj", "{CA5881EB-AA7E-409D-B777-5B50D79E42D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,12 +17,12 @@ Global
 		{BA0DA38B-4D4E-4FA3-AE7E-3B14358D1B62}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA0DA38B-4D4E-4FA3-AE7E-3B14358D1B62}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA0DA38B-4D4E-4FA3-AE7E-3B14358D1B62}.Release|Any CPU.Build.0 = Release|Any CPU
-		{90D24E5B-15F5-4B7D-9C49-86531FE6066D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{90D24E5B-15F5-4B7D-9C49-86531FE6066D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{90D24E5B-15F5-4B7D-9C49-86531FE6066D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{90D24E5B-15F5-4B7D-9C49-86531FE6066D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{90D24E5B-15F5-4B7D-9C49-86531FE6066D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{90D24E5B-15F5-4B7D-9C49-86531FE6066D}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{CA5881EB-AA7E-409D-B777-5B50D79E42D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA5881EB-AA7E-409D-B777-5B50D79E42D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA5881EB-AA7E-409D-B777-5B50D79E42D5}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{CA5881EB-AA7E-409D-B777-5B50D79E42D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA5881EB-AA7E-409D-B777-5B50D79E42D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA5881EB-AA7E-409D-B777-5B50D79E42D5}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 
-namespace EURO2024App.Types
+namespace Euro24Tracker.Types
 {
     public class Nation
     {

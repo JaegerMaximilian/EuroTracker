@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using EURO2024App.Types;
+using Euro24Tracker.Types;
 
 namespace Euro24Tracker.Data
 {
@@ -16,11 +16,11 @@ namespace Euro24Tracker.Data
 
        // public DbSet<Euro24Tracker.Types.Nation> Nation { get; set; } = default!;
 
-        public DbSet<EURO2024App.Types.Nation> Nationen { get; set; }
-        public DbSet<EURO2024App.Types.Gruppe> Gruppen { get; set; }
-        public DbSet<EURO2024App.Types.Spiel> Spiele { get; set; }
-        public DbSet<EURO2024App.Types.Ereignis> Ereignisse { get; set; }
-        public DbSet<EURO2024App.Types.SpielNation> SpielNation { get; set; }
+        public DbSet<Euro24Tracker.Types.Nation> Nationen { get; set; }
+        public DbSet<Euro24Tracker.Types.Gruppe> Gruppen { get; set; }
+        public DbSet<Euro24Tracker.Types.Spiel> Spiele { get; set; }
+        public DbSet<Euro24Tracker.Types.Ereignis> Ereignisse { get; set; }
+        public DbSet<Euro24Tracker.Types.SpielNation> SpielNation { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

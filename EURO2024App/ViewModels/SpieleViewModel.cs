@@ -31,7 +31,7 @@ namespace EURO2024App.ViewModels
             try
             {
                 IsBusy = true;
-                var games = await euroAPIservice.GetGames();
+                var games = await euroAPIservice.GetSpiele();
 
                 if (Games.Count != 0)
                     Games.Clear();
