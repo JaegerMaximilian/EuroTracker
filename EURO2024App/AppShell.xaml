@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="EURO2024App.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:EURO2024App.View">
+    <!--Shell.FlyoutBehavior="Disabled"-->
+    <!--Title="EURO2024_Tracker_MAUI">-->
+
+    <TabBar>
+        <Tab Title="Home"
+             Icon="paw.png">
+            <ShellContent Title="Infos"
+                          Icon="dotnet_bot.png"
+                          Route="InfoPage"
+                          ContentTemplate="{DataTemplate views:InfoPage}" />
+            <ShellContent Title="Stadiums"
+                          Icon="dotnet_bot.png"
+                          Route="StadiumPage"
+                          ContentTemplate="{DataTemplate views:StadiumPage}" />
+        </Tab>
+
+        <Tab Title="Home">
+            <ShellContent Title="Games"
+                          Icon="dotnet_bot.png"
+                          Route="GamePage"
+                          ContentTemplate="{DataTemplate views:GamePage}" />    
+        </Tab>
+
+        <Tab Title="Groups"
+             Icon="paw.png">
+            <ShellContent Title="A"
+                          Icon="dotnet_bot.png"
+                          Route="GroupAPage"
+                          ContentTemplate="{DataTemplate views:GroupAPage}" />
+            <ShellContent Title="B"
+                          Icon="dotnet_bot.png"
+                          Route="GroupBPage"
+                          ContentTemplate="{DataTemplate views:GroupBPage}" />
+        </Tab>
+
+    </TabBar>
+
+</Shell>
+  
