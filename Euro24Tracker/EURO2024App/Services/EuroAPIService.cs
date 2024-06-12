@@ -7,7 +7,7 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Net.Http.Json;
 using Newtonsoft.Json;
-using Euro24Tracker.Types;
+using EURO2024App.Types;
 
 namespace EURO2024App.Services
 {

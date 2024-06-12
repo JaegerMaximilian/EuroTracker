@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Euro24Tracker.Data;
-using Euro24Tracker.Types;
+using EURO2024App.Types;
 
 namespace Euro24Tracker.Controllers
 {

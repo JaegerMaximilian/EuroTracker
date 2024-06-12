@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Euro24Tracker.Types;
+using EURO2024App.Types;
 using Euro24Tracker.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;

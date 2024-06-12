@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 
-namespace EURO2024.Types
+namespace EURO2024App.Types
 {
     public class SpielNation
     {
