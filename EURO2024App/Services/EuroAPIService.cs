@@ -6,53 +6,75 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Net.Http;
+using System.IO;
+using System.Reflection;
 
 namespace EURO2024App.Services
 {
     public class EuroAPIService
     {
         private HttpClient _httpClient;
-        //public string BaseApiAdress {  get; set; }
+        public string BaseApiAdress {  get; set; }
         public EuroAPIService()
         {
-           // BaseApiAdress = baseApiAdress;
+            //string exePath = Assembly.GetExecutingAssembly().Location;
+            //string exeDir = Path.GetDirectoryName(exePath);
+
+            //string projectDir = Directory.GetParent(exeDir).FullName;
+
+            //projectDir = GetCurrentWorkingDirectory();
+
+            //string fullPath = Path.Combine(projectDir, "port.txt");
+            //string port = File.ReadAllText(fullPath);
+
+             BaseApiAdress = $"https://localhost:7094/api";
             _httpClient = new HttpClient();
         }
 
-        List<Spiel> gameList;
+        
 
         public async Task<List<Spiel>> GetSpiele()
         {
-            //// Offline
-            //using var stream = await FileSystem.OpenAppPackageFileAsync("monkeydata.json");
-            //using var reader = new StreamReader(stream);
-            //var contents = await reader.ReadToEndAsync();
-            //gameList = System.Text.Json.JsonSerializer.Deserialize(contents, System.Text.Json.SpielContext.Default.ListSpiel);
-
-            //return gameList;
-
-            HttpClient client = new HttpClient();
-
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, "https://localhost:7094/api/spiele/List");
-
-            request.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:127.0) Gecko/20100101 Firefox/127.0");
-            request.Headers.Add("Accept", "text/plain");
-            request.Headers.Add("Accept-Language", "de,en-US;q=0.7,en;q=0.3");
-            // request.Headers.Add("Accept-Encoding", "gzip, deflate, br, zstd");
-            request.Headers.Add("Referer", "https://localhost:7094/swagger/index.html");
-            request.Headers.Add("DNT", "1");
-            request.Headers.Add("Connection", "keep-alive");
-            request.Headers.Add("Sec-Fetch-Dest", "empty");
-            request.Headers.Add("Sec-Fetch-Mode", "cors");
-            request.Headers.Add("Sec-Fetch-Site", "same-origin");
-            request.Headers.Add("Priority", "u=1");
-            request.Headers.Add("TE", "trailers");
-
-            HttpResponseMessage response = await client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
-            string body = await response.Content.ReadAsStringAsync();
-            List<Spiel> spiele = JsonConvert.DeserializeObject<List<Spiel>>(body);
-            return spiele;
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri(BaseApiAdress + "/spiele/list"),
+                Headers =
+                            {
+                                { "accept", "text/plain" },
+                            },
+            };
+            using (var response = await _httpClient.SendAsync(request))
+            {
+                response.EnsureSuccessStatusCode();
+                var body = await response.Content.ReadAsStringAsync();
+                List<Spiel> spiele = JsonConvert.DeserializeObject<List<Spiel>>(body);
+                return spiele;
+            }
+            
         }
+
+        public async Task<List<Gruppe>> GetGruppen()
+        {
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri(BaseApiAdress + "/gruppen/list"),
+                Headers =
+                            {
+                                { "accept", "text/plain" },
+                            },
+            };
+            using (var response = await _httpClient.SendAsync(request))
+            {
+                response.EnsureSuccessStatusCode();
+                var body = await response.Content.ReadAsStringAsync();
+                List<Gruppe> gruppen = JsonConvert.DeserializeObject<List<Gruppe>>(body);
+                return gruppen;
+            }
+
+        }
+
+
     }
 }

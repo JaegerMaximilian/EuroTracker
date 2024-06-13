@@ -12,34 +12,34 @@ using System.Threading.Tasks;
 
 namespace EURO2024App.ViewModels
 {
-    public partial class GamesViewModel : BaseViewModel
+    public partial class GruppenViewModel : BaseViewModel
     {
-        public ObservableCollection<Spiel> Games { get; } = new();
+        public ObservableCollection<Gruppe> Gruppen { get; } = new();
 
         [ObservableProperty]
         private bool _isRefreshing;
 
         private EuroAPIService euroAPIservice;
 
-        public GamesViewModel(EuroAPIService euroAPIservice)
+        public GruppenViewModel(EuroAPIService euroAPIservice)
         {
-            Title = "Games";
+            Title = "Gruppen";
             this.euroAPIservice = euroAPIservice;
         }
 
         [RelayCommand]
-        async Task GetGamesAsync()
+        async Task GetGruppenAsync()
         {
 
             try
             {
                 IsRefreshing = true;
-                List<Spiel> games = new();
-                games = await euroAPIservice.GetSpiele();
+                List<Gruppe> gruppen = new();
+                gruppen = await euroAPIservice.GetGruppen();
 
-                foreach (Spiel game in games)
+                foreach (Gruppe gruppe in gruppen)
                 {
-                    Games.Add(game);
+                    Gruppen.Add(gruppe);
                 }
 
             }
@@ -54,20 +54,12 @@ namespace EURO2024App.ViewModels
 
         }
 
-        [RelayCommand]
-        async Task GoToGamesDetails(Spiel game)
-        {
-            await Shell.Current.GoToAsync(nameof(GameDetailPage), true, new Dictionary<string, object>
-            {
-                { "Game", game }
-            });
-        }
 
         [RelayCommand]
-        async Task ReloadGames()
+        async Task ReloadGruppen()
         {
-            Games.Clear();
-            await GetGamesAsync();
+            Gruppen.Clear();
+            await GetGruppenAsync();
 
         }
 

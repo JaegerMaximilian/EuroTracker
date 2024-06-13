@@ -77,10 +77,25 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="View\GameDetailPage.xaml.cs">
+	    <DependentUpon>GameDetailPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\GruppenPage.xaml.cs">
+	    <DependentUpon>GruppenPage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiXaml Update="View\AddEventPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\EventPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\GameDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\GruppenPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\GamePage.xaml">

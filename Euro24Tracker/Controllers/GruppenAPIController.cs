@@ -11,9 +11,9 @@ using Euro24Tracker.Data;
 
 namespace CBC_IL2.Controllers
 {
-    [Route("api/spiele")] // ist immer hardgecoded, auch in der Industrie, darf sich halt nie ändern weil sonst müssen wir es hier auch ändern
+    [Route("api/gruppen")] // ist immer hardgecoded, auch in der Industrie, darf sich halt nie ändern weil sonst müssen wir es hier auch ändern
     [ApiController]
-    public class SpieleAPIController : ControllerBase
+    public class GruppenAPIController : ControllerBase
     {
 
         #region private Members
@@ -24,7 +24,7 @@ namespace CBC_IL2.Controllers
 
         #region Constructor
 
-        public SpieleAPIController(Euro24TrackerContext context)
+        public GruppenAPIController(Euro24TrackerContext context)
         {
             _context = context;
         }
@@ -35,13 +35,13 @@ namespace CBC_IL2.Controllers
 
         [HttpGet]
         [Route("List")]
-        public async Task<List<Spiel>> ListSpiele()
+        public async Task<List<Gruppe>> ListGruppe()
         {
-            return await _context.Spiele.Include(e => e.Nationen).Include(e=>e.Ereignisse).ToListAsync();
+            return await _context.Gruppen.Include(e => e.Nationen).ToListAsync();
         }
 
 
-       
+      
         #endregion
 
     }

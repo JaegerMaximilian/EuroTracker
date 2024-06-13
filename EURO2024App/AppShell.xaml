@@ -29,14 +29,10 @@
 
         <Tab Title="Groups"
              Icon="paw.png">
-            <ShellContent Title="A"
-                          Icon="dotnet_bot.png"
-                          Route="GroupAPage"
-                          ContentTemplate="{DataTemplate views:GroupAPage}" />
-            <ShellContent Title="B"
-                          Icon="dotnet_bot.png"
-                          Route="GroupBPage"
-                          ContentTemplate="{DataTemplate views:GroupBPage}" />
+            <ShellContent Title="Games"
+              Icon="dotnet_bot.png"
+              Route="GamePage"
+              ContentTemplate="{DataTemplate views:GruppenPage}" />
         </Tab>
 
     </TabBar>
