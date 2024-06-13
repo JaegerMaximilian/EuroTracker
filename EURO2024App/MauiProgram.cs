@@ -28,9 +28,11 @@ namespace EURO2024App
 
             builder.Services.AddSingleton<GamesViewModel>();
             builder.Services.AddSingleton<EventViewModel>();
+            builder.Services.AddSingleton<AddEventViewModel>();
 
             builder.Services.AddSingleton<GamePage>();
             builder.Services.AddSingleton<EventPage>();
+            builder.Services.AddSingleton<AddEventPage>();
 
             builder.Services.AddSingleton<GruppenViewModel>();
             builder.Services.AddSingleton<GruppenPage>();
