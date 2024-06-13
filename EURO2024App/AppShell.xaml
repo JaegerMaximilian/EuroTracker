@@ -20,7 +20,7 @@
                           ContentTemplate="{DataTemplate views:StadiumPage}" />
         </Tab>
 
-        <Tab Title="Home">
+        <Tab Title="Games">
             <ShellContent Title="Games"
                           Icon="dotnet_bot.png"
                           Route="GamePage"
