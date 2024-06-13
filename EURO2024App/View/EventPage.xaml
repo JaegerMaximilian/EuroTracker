@@ -5,59 +5,27 @@
              xmlns:viewmodels="clr-namespace:EURO2024App.ViewModels"
              xmlns:model="clr-namespace:EURO2024App.Model"
              x:DataType="viewmodels:EventViewModel"
-             x:Name="EventView1">
-             Title="{Binding Title}">
+             x:Name="EventView1"
+             Title="{Binding Game.Id}">
+
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
 
-    <Grid
-     ColumnDefinitions="*,*"
-     ColumnSpacing="5"
-     RowDefinitions="*,Auto"
-     RowSpacing="0">
 
-        <CollectionView 
-                 ItemsSource="{Binding Ereignisse}"
-                 SelectionMode="None">
-
-
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="model:Ereignis">
-                    <Frame HeightRequest="125">
-                        
-                        <HorizontalStackLayout Spacing="10">
-                            <VerticalStackLayout>
-                                <Label Text="ID" FontSize="Small"/>
-                                <Label Text="{Binding Id}" FontSize="Medium" VerticalTextAlignment="Center"/>
-                            </VerticalStackLayout>
-                            <VerticalStackLayout>
-                                <Label Text="Stadion" FontSize="Small"/>
-                                <Label Text="{Binding Stadion}" FontSize="Medium" VerticalTextAlignment="Center"/>
-                            </VerticalStackLayout>
-                            <VerticalStackLayout>
-                                <Label Text="Kommentar" FontSize="Small"/>
-                                <CheckBox   IsChecked="{Binding Kommentar}" />
-                            </VerticalStackLayout>
-
-                            <CollectionView
-                                 ItemsSource="{Binding Nationen}"
-                                 SelectionMode="None">
-
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate x:DataType="model:Nation">
-                                        <Frame>
-                                            <VerticalStackLayout>
-                                                <Label Text="{Binding ShortName}"/>
-                                            </VerticalStackLayout>
-                                        </Frame>
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
-
-
-                        </HorizontalStackLayout>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+        <Label Grid.Row="0" Grid.Column="0"
+            Text="{Binding Game.Stadion, StringFormat='Stadion: {0}'}"
+            FontSize="18"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"/>
+        
     </Grid>
 </ContentPage>
