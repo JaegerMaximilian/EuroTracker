@@ -22,10 +22,34 @@
 
 
         <Label Grid.Row="0" Grid.Column="0"
-            Text="{Binding Game.Stadion, StringFormat='Stadion: {0}'}"
+            Text="{Binding Game.Ereignisse, StringFormat='Stadion: {0}'}"
             FontSize="18"
             VerticalOptions="Center" 
             HorizontalOptions="Center"/>
-        
+
+        <CollectionView
+            ItemsSource="{Binding Game.Nationen}"
+            SelectionMode="None">   
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Ereignis">
+                    <Frame>
+                        <HorizontalStackLayout>
+                            
+                            <VerticalStackLayout>
+                                <Label Text="ID" FontSize="Small"/>
+                                <Label Text="{Binding Id}" FontSize="Medium" VerticalTextAlignment="Center"/>
+                            </VerticalStackLayout>
+                            <VerticalStackLayout>
+                                <Label Text="Kommentar" FontSize="Small"/>
+                                <Label Text="{Binding Kommentar}" FontSize="Medium" VerticalTextAlignment="Center"/>
+                            </VerticalStackLayout>
+
+                        </HorizontalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
     </Grid>
 </ContentPage>
