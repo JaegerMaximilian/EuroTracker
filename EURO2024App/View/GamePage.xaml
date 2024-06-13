@@ -8,38 +8,67 @@
              x:Name="GamesView1"
              Title="{Binding Title}">
   
-    <!--<Grid
+    <Grid
         ColumnDefinitions="*,*"
         ColumnSpacing="5"
         RowDefinitions="*,Auto"
         RowSpacing="0">
-            <RefreshView Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:GamesViewModel}}, Path=ReloadGamesCommand}"
+        <RefreshView Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:GamesViewModel}}, Path=ReloadGamesCommand}"
                          Grid.ColumnSpan="2"
-                         IsRefreshing="{Binding IsBusy}">
+                         IsRefreshing="{Binding IsRefreshing}">
 
-                <CollectionView 
+            <CollectionView 
                     ItemsSource="{Binding Games}"
                     SelectionMode="None">
 
 
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="model:Spiel">
-                            <Frame HeightRequest="125">
-                                <Frame.GestureRecognizers>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Spiel">
+                        <Frame HeightRequest="125">
+                            <Frame.GestureRecognizers>
                                 <TapGestureRecognizer
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:GamesViewModel}}, Path=GoToGamesDetailsCommand}"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:GamesViewModel}}, Path=GoToGameDetailsCommand}"
                                         CommandParameter="{Binding .}"/>
-                                </Frame.GestureRecognizers>
-                                <Label Text="{Binding Id}" FontSize="Medium" VerticalTextAlignment="Center"/>
-                            </Frame>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </RefreshView>
+                            </Frame.GestureRecognizers>
+                            <HorizontalStackLayout Spacing="10">
+                                <VerticalStackLayout>
+                                    <Label Text="ID" FontSize="Small"/>
+                                    <Label Text="{Binding Id}" FontSize="Medium" VerticalTextAlignment="Center"/>
+                                </VerticalStackLayout>
+                                <VerticalStackLayout>
+                                    <Label Text="Stadion" FontSize="Small"/>
+                                    <Label Text="{Binding Stadion}" FontSize="Medium" VerticalTextAlignment="Center"/>
+                                </VerticalStackLayout>
+                                <VerticalStackLayout>
+                                    <Label Text="Gruppenphase" FontSize="Small"/>
+                                    <CheckBox   IsChecked="{Binding Gruppenphase}" />
+                                </VerticalStackLayout>
 
+                                <CollectionView
+                                    ItemsSource="{Binding Nationen}"
+                                    SelectionMode="None">
+                                    
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="model:Nation">
+                                            <Frame>
+                                                <VerticalStackLayout>
+                                                    <Label Text="{Binding ShortName}"/>
+                                                </VerticalStackLayout>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
 
-            <Button Grid.Row="1" Grid.ColumnSpan="2" Text="Add Team" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:GamesViewModel}}, Path=AddTeamCommand}"/>
+                                            
+                            </HorizontalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
 
-    </Grid>-->
+    </Grid>
+
+   
 
 </ContentPage>

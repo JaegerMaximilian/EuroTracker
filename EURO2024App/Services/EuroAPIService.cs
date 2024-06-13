@@ -12,24 +12,15 @@ namespace EURO2024App.Services
     public class EuroAPIService
     {
         private HttpClient _httpClient;
-        //public string BaseApiAdress {  get; set; }
+        public string BaseApiAdress {  get; set; }
         public EuroAPIService()
         {
-           // BaseApiAdress = baseApiAdress;
+            //BaseApiAdress = baseApiAdress;
             _httpClient = new HttpClient();
         }
 
-        List<Spiel> gameList;
-
         public async Task<List<Spiel>> GetSpiele()
         {
-            //// Offline
-            //using var stream = await FileSystem.OpenAppPackageFileAsync("monkeydata.json");
-            //using var reader = new StreamReader(stream);
-            //var contents = await reader.ReadToEndAsync();
-            //gameList = System.Text.Json.JsonSerializer.Deserialize(contents, System.Text.Json.SpielContext.Default.ListSpiel);
-
-            //return gameList;
 
             HttpClient client = new HttpClient();
 
