@@ -6,7 +6,7 @@
              xmlns:model="clr-namespace:EURO2024App.Model"
              x:DataType="viewmodels:EventViewModel"
              x:Name="EventView1"
-             Title="{Binding Game.Id}">
+             Title="{Binding Title}">
 
     <Grid >
         <Grid.ColumnDefinitions>

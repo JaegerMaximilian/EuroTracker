@@ -57,6 +57,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\berlin.jpg" />
 	  <None Remove="Resources\Images\cologne.jpg" />
 	  <None Remove="Resources\Images\dortmund.jpg" />
 	  <None Remove="Resources\Images\duesseldorf.jpg" />
