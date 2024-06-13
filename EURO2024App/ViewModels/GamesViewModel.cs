@@ -55,9 +55,9 @@ namespace EURO2024App.ViewModels
         }
 
         [RelayCommand]
-        async Task GoToGamesDetails(Spiel game)
+        async Task GoToGameDetails(Spiel game)
         {
-            await Shell.Current.GoToAsync(nameof(GameDetailPage), true, new Dictionary<string, object>
+            await Shell.Current.GoToAsync(nameof(EventPage), true, new Dictionary<string, object>
             {
                 { "Game", game }
             });
