@@ -2,11 +2,62 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EURO2024App.View.EventPage"
-             Title="EventPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             xmlns:viewmodels="clr-namespace:EURO2024App.ViewModels"
+             xmlns:model="clr-namespace:EURO2024App.Model"
+             x:DataType="viewmodels:EventViewModel"
+             x:Name="EventView1">
+             Title="{Binding Title}">
+
+
+    <Grid
+     ColumnDefinitions="*,*"
+     ColumnSpacing="5"
+     RowDefinitions="*,Auto"
+     RowSpacing="0">
+
+        <CollectionView 
+                 ItemsSource="{Binding Ereignisse}"
+                 SelectionMode="None">
+
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Ereignis">
+                    <Frame HeightRequest="125">
+                        
+                        <HorizontalStackLayout Spacing="10">
+                            <VerticalStackLayout>
+                                <Label Text="ID" FontSize="Small"/>
+                                <Label Text="{Binding Id}" FontSize="Medium" VerticalTextAlignment="Center"/>
+                            </VerticalStackLayout>
+                            <VerticalStackLayout>
+                                <Label Text="Stadion" FontSize="Small"/>
+                                <Label Text="{Binding Stadion}" FontSize="Medium" VerticalTextAlignment="Center"/>
+                            </VerticalStackLayout>
+                            <VerticalStackLayout>
+                                <Label Text="Kommentar" FontSize="Small"/>
+                                <CheckBox   IsChecked="{Binding Kommentar}" />
+                            </VerticalStackLayout>
+
+                            <CollectionView
+                                 ItemsSource="{Binding Nationen}"
+                                 SelectionMode="None">
+
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="model:Nation">
+                                        <Frame>
+                                            <VerticalStackLayout>
+                                                <Label Text="{Binding ShortName}"/>
+                                            </VerticalStackLayout>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+
+
+                        </HorizontalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
 </ContentPage>
