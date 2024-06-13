@@ -14,6 +14,7 @@
             Routing.RegisterRoute("GamePage", typeof(View.GamePage));
             Routing.RegisterRoute("GroupAPage", typeof(View.GroupAPage));
             Routing.RegisterRoute("GroupBPage", typeof(View.GroupBPage));
+            Routing.RegisterRoute("EventPage", typeof(View.EventPage));
         }
     }
 }
