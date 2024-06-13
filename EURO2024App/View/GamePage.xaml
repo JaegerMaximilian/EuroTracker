@@ -4,7 +4,7 @@
              x:Class="EURO2024App.View.GamePage"
              xmlns:viewmodels="clr-namespace:EURO2024App.ViewModels"
              xmlns:model="clr-namespace:EURO2024App.Model"
-             x:DataType="viewmodels:SpieleViewModel"
+             x:DataType="viewmodels:GamesViewModel"
              x:Name="GamesView1"
              Title="{Binding Title}">
   

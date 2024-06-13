@@ -26,7 +26,7 @@ namespace EURO2024App
 #endif
             builder.Services.AddSingleton<EuroAPIService>();
 
-            builder.Services.AddSingleton<SpieleViewModel>();
+            builder.Services.AddSingleton<GamesViewModel>();
             builder.Services.AddSingleton<GamePage>();
 
             return builder.Build();

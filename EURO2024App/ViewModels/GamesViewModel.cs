@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using EURO2024App.Services;
 using EURO2024App.View;
 using System;
@@ -14,7 +15,11 @@ namespace EURO2024App.ViewModels
     public partial class GamesViewModel : BaseViewModel
     {
         public ObservableCollection<Spiel> Games { get; } = new();
-        EuroAPIService euroAPIservice;
+
+        [ObservableProperty]
+        private bool _isRefreshing;
+
+        private EuroAPIService euroAPIservice;
 
         public GamesViewModel(EuroAPIService euroAPIservice)
         {
@@ -25,25 +30,22 @@ namespace EURO2024App.ViewModels
         [RelayCommand]
         async Task GetGamesAsync()
         {
-            if (IsBusy)
-                return;
 
             try
             {
-                IsBusy = true;
-                var games = await euroAPIservice.GetSpiele();
+                IsRefreshing = true;
+                List<Spiel> games = new();
+                games = await euroAPIservice.GetSpiele();
 
-                if (Games.Count != 0)
-                    Games.Clear();
-
-                foreach (var game in games)
+                foreach (Spiel game in games)
+                {
                     Games.Add(game);
+                }
 
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Unable to get games: {ex.Message}");
-                await Shell.Current.DisplayAlert("Error!", ex.Message, "OK");
+                //Shell.Current.ShowPopup(new ErrorPopupView(ex, "Error Loading Games"));
             }
             finally
             {
@@ -62,17 +64,11 @@ namespace EURO2024App.ViewModels
         }
 
         [RelayCommand]
-        async Task ReloadTeams()
+        async Task ReloadGames()
         {
             Games.Clear();
             await GetGamesAsync();
 
-        }
-
-        [RelayCommand]
-        async Task AddGame()
-        {
-            await Shell.Current.GoToAsync(nameof(AddEventPage), true);
         }
 
     }

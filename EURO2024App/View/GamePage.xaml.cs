@@ -5,10 +5,10 @@ namespace EURO2024App.View;
 
 public partial class GamePage : ContentPage
 {
-	public GamePage(SpieleViewModel spieleViewModel)
+	public GamePage(GamesViewModel gamesViewModel)
 	{
 		InitializeComponent();
-		BindingContext = spieleViewModel;
+		BindingContext = gamesViewModel;
 		
 		
 	}

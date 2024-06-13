@@ -25,7 +25,9 @@
             <Image Source="https://upload.wikimedia.org/wikipedia/de/thumb/5/5c/Logo_Fu%C3%9Fball_Europameisterschaft_2024.svg/1200px-Logo_Fu%C3%9Fball_Europameisterschaft_2024.svg.png"
                    Aspect="AspectFit"
                    HorizontalOptions="Center"
-                   VerticalOptions="Center" />
+                   VerticalOptions="Center" 
+                   WidthRequest="150"
+                   HeightRequest="250"/>
 
             <!-- Description -->
             <Label Text="The UEFA Euro 2024 will be the 17th edition of the premier European football championship for national teams. Germany will host the tournament for the second time, following 1988."
