@@ -13,16 +13,18 @@ namespace EURO2024App.ViewModels
     public partial class EventViewModel : BaseViewModel
     {
         EuroAPIService euroAPIservice;
+       
 
         public EventViewModel(EuroAPIService euroAPIService)
         {
-           
+            Title = "Events";
             this.euroAPIservice = euroAPIservice;
         }
 
         [ObservableProperty]
         Spiel _game;
 
+        
 
     }
 }
