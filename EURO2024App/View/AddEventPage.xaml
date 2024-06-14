@@ -8,7 +8,8 @@
              x:Name="AddEventView1"
              Title="{Binding Title}">
 
-    <StackLayout Padding="20">
+
+        <StackLayout Padding="20">
 
         <Entry Placeholder="Minute" Keyboard="Numeric" x:Name="MinuteEntry" Text="{Binding Minute}" />
         <Entry Placeholder="Kommentar" x:Name="CommentEntry" Text="{Binding Kommentar}" />
@@ -18,5 +19,10 @@
         <Button Text="Confirm" Command="{Binding CreateEreignisCommand}"/>
 
     </StackLayout>
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding BackCommand}"
+                             />
+    </Shell.BackButtonBehavior>
 
 </ContentPage>

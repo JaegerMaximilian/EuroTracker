@@ -23,6 +23,7 @@ namespace EURO2024App.ViewModels
 
         public GamesViewModel(EuroAPIService euroAPIservice)
         {
+            IsRefreshing = true;
             Title = "Games";
             this.euroAPIservice = euroAPIservice;
         }
@@ -63,11 +64,14 @@ namespace EURO2024App.ViewModels
             });
         }
 
+
+
         [RelayCommand]
         async Task ReloadGames()
         {
             Games.Clear();
             await GetGamesAsync();
+            IsRefreshing = false;
 
         }
 

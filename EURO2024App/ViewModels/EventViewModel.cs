@@ -18,7 +18,7 @@ namespace EURO2024App.ViewModels
 
         public EventViewModel(EuroAPIService euroAPIService)
         {
-            Title = "Events";
+            Title = "Spiel";
             this.euroAPIservice = euroAPIservice;
         }
 
@@ -33,7 +33,9 @@ namespace EURO2024App.ViewModels
                 { "Game", Game}
             });
         }
+
         
 
-    }
+
+        }
 }

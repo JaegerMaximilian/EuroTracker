@@ -19,7 +19,7 @@ public partial class GamePage : ContentPage
         base.OnAppearing();
         if (BindingContext is GamesViewModel viewModel)
         {
-           // await viewModel.ReloadGamesCommand.ExecuteAsync(null);
+           //await viewModel.GetGamesCommand.ExecuteAsync(null);
         }
     }
 }

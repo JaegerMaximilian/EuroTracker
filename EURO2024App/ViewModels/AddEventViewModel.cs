@@ -66,6 +66,15 @@ namespace EURO2024App.ViewModels
 
             return spielereignis;
         }
+
+        [RelayCommand]
+        public async Task Back()
+        {
+            await Shell.Current.GoToAsync(nameof(EventPage), true, new Dictionary<string, object>
+            {
+                { "Game", Game}
+            });
+        }
     }
 
 }
