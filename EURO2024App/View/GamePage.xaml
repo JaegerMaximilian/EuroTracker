@@ -32,15 +32,15 @@
                             </Frame.GestureRecognizers>
                             <HorizontalStackLayout Spacing="10">
                                 <VerticalStackLayout>
-                                    <Label Text="ID" FontSize="Small"/>
+                                    <Label Text="ID" FontSize="Micro"/>
                                     <Label Text="{Binding Id}" FontSize="Medium" VerticalTextAlignment="Center"/>
                                 </VerticalStackLayout>
                                 <VerticalStackLayout>
-                                    <Label Text="Stadion" FontSize="Small"/>
+                                    <Label Text="Stadion" FontSize="Micro"/>
                                     <Label Text="{Binding Stadion}" FontSize="Medium" VerticalTextAlignment="Center"/>
                                 </VerticalStackLayout>
                                 <VerticalStackLayout>
-                                    <Label Text="Gruppenphase" FontSize="Small"/>
+                                    <Label Text="Gruppenphase" FontSize="Micro"/>
                                     <CheckBox   IsChecked="{Binding Gruppenphase}" />
                                 </VerticalStackLayout>
 

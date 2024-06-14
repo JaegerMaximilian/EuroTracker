@@ -16,6 +16,6 @@
             Routing.RegisterRoute("GroupBPage", typeof(View.GroupBPage));
             Routing.RegisterRoute("EventPage", typeof(View.EventPage));
             Routing.RegisterRoute("GruppenPage", typeof(View.GruppenPage));
-        }
+            Routing.RegisterRoute("AddEventPage", typeof(View.AddEventPage));        }
     }
 }

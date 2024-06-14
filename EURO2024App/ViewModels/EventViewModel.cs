@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using EURO2024App.Services;
 using EURO2024App.View;
 using System;
@@ -24,6 +25,14 @@ namespace EURO2024App.ViewModels
         [ObservableProperty]
         Spiel _game;
 
+        [RelayCommand]
+        public async Task AddEvent()
+        {
+            await Shell.Current.GoToAsync(nameof(AddEventPage),true, new Dictionary<string, object>
+            {
+                { "Game", Game}
+            });
+        }
         
 
     }

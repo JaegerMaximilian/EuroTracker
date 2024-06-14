@@ -75,6 +75,11 @@ namespace EURO2024App.Services
 
         }
 
+        public async Task CreateEvent(object newobject)
+        {
+
+        }
+
 
     }
 }
