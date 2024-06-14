@@ -12,13 +12,6 @@ using System.Net.Http.Json;
 using System.Text.Json.Serialization;
 
 
-using System.Text.Json.Serialization;
-using System.Text.Json;
-
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Net.Http.Json;
-using System.Text;
 
 namespace EURO2024App.Services
 {
@@ -63,6 +56,26 @@ namespace EURO2024App.Services
                 return spiele;
             }
             
+        }
+
+        public async Task<Spiel> GetSpiel(int spielId)
+        {
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri(BaseApiAdress + $"/spiele/{spielId}"),
+                Headers =
+                            {
+                                { "accept", "text/plain" },
+                            },
+            };
+            using (var response = await _httpClient.SendAsync(request))
+            {
+                response.EnsureSuccessStatusCode();
+                var body = await response.Content.ReadAsStringAsync();
+                Spiel spiel = JsonConvert.DeserializeObject<Spiel>(body);
+                return spiel;
+            }
         }
 
         public async Task<List<Gruppe>> GetGruppen()

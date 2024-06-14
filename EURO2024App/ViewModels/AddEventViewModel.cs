@@ -38,7 +38,14 @@ namespace EURO2024App.ViewModels
             {
                 var ereignis = CreateEreignisForAPI();
                 await euroAPIService.CreateEvent(ereignis);
-                await Shell.Current.GoToAsync(nameof(EventPage), true);
+
+                Spiel spiel = await euroAPIService.GetSpiel(ereignis.SpielId);
+
+                await Shell.Current.GoToAsync(nameof(EventPage), true, new Dictionary<string, object>
+                {
+                    { "Game", spiel }
+                });
+                //await Shell.Current.GoToAsync(nameof(EventPage), true);
 
             }
             catch
