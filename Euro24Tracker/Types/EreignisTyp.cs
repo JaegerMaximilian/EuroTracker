@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Security.Cryptography.X509Certificates;
 
 
 namespace Euro24Tracker.Types
@@ -9,6 +10,13 @@ namespace Euro24Tracker.Types
         public string Name { get; set; }
         public string ImageLink { get; set; }
 
-        public ICollection<Ereignis>? Ereignisse { get; set; }
+        public ICollection<Ereignis>? Ereignisse { get; set; } = new List<Ereignis>();
+
+        public EreignisTyp()
+        {
+            Id = 0;
+            Name = "";
+            ImageLink = "";
+        }
     }
 }

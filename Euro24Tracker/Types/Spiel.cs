@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Security.Cryptography.X509Certificates;
 
 
 namespace Euro24Tracker.Types
@@ -14,7 +15,13 @@ namespace Euro24Tracker.Types
         public ICollection<Nation> Nationen { get; set; } = new List<Nation>();
         public ICollection<Ereignis>? Ereignisse { get; set; } = new List<Ereignis>();
 
-       
+        public Spiel()
+        {
+            Id = 0;
+            Stadion = "";
+            Gruppenphase = true;
+
+        }
 
     }
 

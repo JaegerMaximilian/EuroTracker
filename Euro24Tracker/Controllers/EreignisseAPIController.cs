@@ -6,10 +6,10 @@ using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 using System.Text.Json;
 using Euro24Tracker.Data;
+using Euro24Tracker.Controllers;
 
 
-
-namespace CBC_IL2.Controllers
+namespace Euro24Tracker.Controllers
 {
     [Route("api/ereignisse")] // ist immer hardgecoded, auch in der Industrie, darf sich halt nie ändern weil sonst müssen wir es hier auch ändern
     [ApiController]
@@ -45,6 +45,7 @@ namespace CBC_IL2.Controllers
         public async Task<IActionResult> CreateNewEreignis([FromBody] Ereignis ereignis)
         {
             
+
             _context.Ereignisse.Add(ereignis);
             await _context.SaveChangesAsync();
 

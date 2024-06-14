@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Security.Cryptography.X509Certificates;
 
 
 namespace Euro24Tracker.Types
@@ -10,9 +11,13 @@ namespace Euro24Tracker.Types
         public string Name { get; set; }
 
         // Navigation Properties
-        public ICollection<Nation>? Nationen { get; set; }
+        public ICollection<Nation>? Nationen { get; set; } = new List<Nation>();
 
-
+        public Gruppe()
+        {
+            Id = 0;
+            Name = "";
+        }
 
     }
 

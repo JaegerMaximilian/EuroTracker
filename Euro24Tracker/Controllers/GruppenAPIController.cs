@@ -9,7 +9,7 @@ using Euro24Tracker.Data;
 
 
 
-namespace CBC_IL2.Controllers
+namespace Euro24Tracker.Controllers
 {
     [Route("api/gruppen")] // ist immer hardgecoded, auch in der Industrie, darf sich halt nie ändern weil sonst müssen wir es hier auch ändern
     [ApiController]
@@ -41,7 +41,23 @@ namespace CBC_IL2.Controllers
         }
 
 
-      
+        [HttpPost]
+        [Route("Create")]
+        public async Task<IActionResult> CreateNewMovie([FromBody] Gruppe gruppe)
+        {
+            // specify
+
+            // check in db
+            _context.Gruppen.Add(gruppe);
+            await _context.SaveChangesAsync();
+
+
+            // return sth
+
+            return base.Created(); // base ist nicht nötig aber gut zum suchen mit intellisense
+        }
+
+
         #endregion
 
     }

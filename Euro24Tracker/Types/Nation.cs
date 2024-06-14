@@ -19,10 +19,17 @@ namespace Euro24Tracker.Types
 
         // Navigation Properties
         public int? GruppeId { get; set; }
-        public Gruppe? Gruppe { get; set; }
+        public Gruppe? Gruppe { get; set; } = new Gruppe();
 
-        public ICollection<Ereignis>? TorEreginisse { get; set; }
-        public ICollection<Spiel>? Spiele { get; set; }
+        public ICollection<Ereignis>? TorEreginisse { get; set; } = new List<Ereignis>();
+        public ICollection<Spiel>? Spiele { get; set; } = new List<Spiel>();
+
+        public Nation()
+        {
+            Id = 0;
+            ShortName = "";
+            LogoLink = "";
+        }
 
 
 

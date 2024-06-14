@@ -14,10 +14,10 @@ namespace Euro24Tracker.Types
 
         // Navigation Properties
         public int SpielId { get; set; }
-        public Spiel Spiel { get; set; }
+        public Spiel? Spiel { get; set; }
 
         public int? EreignisTypId { get; set; }
-        public EreignisTyp? EreignisTyp {  get; set; }
+        public EreignisTyp? EreignisTyp { get; set; }
 
         public int? TorNationId { get; set; }
         public Nation? TorNation { get; set; }

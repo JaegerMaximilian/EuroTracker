@@ -14,7 +14,7 @@ namespace EURO2024App.Model
 
         // Navigation Properties
         public int SpielId { get; set; }
-        public Spiel Spiel { get; set; }
+        public Spiel? Spiel { get; set; }
 
         public int? EreignisTypId { get; set; }
         public EreignisTyp? EreignisTyp {  get; set; }

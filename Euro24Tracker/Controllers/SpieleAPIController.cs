@@ -7,9 +7,14 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using Euro24Tracker.Data;
 
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Net.Http.Json;
+using System.Text;
 
 
-namespace CBC_IL2.Controllers
+
+namespace Euro24Tracker.Controllers
 {
     [Route("api/spiele")] // ist immer hardgecoded, auch in der Industrie, darf sich halt nie ändern weil sonst müssen wir es hier auch ändern
     [ApiController]
@@ -37,7 +42,15 @@ namespace CBC_IL2.Controllers
         [Route("List")]
         public async Task<List<Spiel>> ListSpiele()
         {
-            return await _context.Spiele.Include(e => e.Nationen).Include(e=>e.Ereignisse).ToListAsync();
+            
+
+            var spiele =  await _context.Spiele
+                .Include(e => e.Nationen)
+                //.ThenInclude(e => e.Gruppe)
+                .Include(e => e.Ereignisse).ToListAsync();
+
+          
+            return spiele;
         }
 
 
