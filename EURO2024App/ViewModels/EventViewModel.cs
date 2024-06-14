@@ -50,7 +50,7 @@ namespace EURO2024App.ViewModels
             {
                 nation.ToreImSpiel = nation.TorEreginisse.Count(e => e.SpielId == _game.Id);
             }
-            _game.Ereignisse = _game.Ereignisse.OrderBy(e => e.Minute).ToList();
+            _game.Ereignisse = _game.Ereignisse.OrderByDescending(e => e.Minute).ToList();
             IsBusy = false;
         }
 

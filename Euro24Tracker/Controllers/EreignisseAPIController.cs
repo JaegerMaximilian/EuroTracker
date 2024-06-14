@@ -76,8 +76,8 @@ namespace Euro24Tracker.Controllers
 
                 foreach(Spiel spiel in tornation.Spiele)
                 {
-                    int tore_tornation = _context.Ereignisse.Where(e => e.SpielId == ereignis.SpielId && e.TorNationId == ereignis.TorNationId).ToList().Count() + 1;
-                    int tore_gegentornation = _context.Ereignisse.Where(e => e.SpielId == ereignis.SpielId && e.TorNationId == gegentornation.Id).ToList().Count();
+                    int tore_tornation = _context.Ereignisse.Where(e => e.SpielId == spiel.Id && e.TorNationId == ereignis.TorNationId).ToList().Count() + 1;
+                    int tore_gegentornation = _context.Ereignisse.Where(e => e.SpielId == spiel.Id && e.TorNationId == gegentornation.Id).ToList().Count();
                     if (tore_tornation > tore_gegentornation)
                     {
                         tornationPunkte += 3;
@@ -90,8 +90,8 @@ namespace Euro24Tracker.Controllers
 
                 foreach (Spiel spiel in gegentornation.Spiele)
                 {
-                    int tore_tornation = _context.Ereignisse.Where(e => e.SpielId == ereignis.SpielId && e.TorNationId == ereignis.TorNationId).ToList().Count() + 1;
-                    int tore_gegentornation = _context.Ereignisse.Where(e => e.SpielId == ereignis.SpielId && e.TorNationId == gegentornation.Id).ToList().Count();
+                    int tore_tornation = _context.Ereignisse.Where(e => e.SpielId == spiel.Id && e.TorNationId == ereignis.TorNationId).ToList().Count() + 1;
+                    int tore_gegentornation = _context.Ereignisse.Where(e => e.SpielId == spiel.Id && e.TorNationId == gegentornation.Id).ToList().Count();
                     if (tore_tornation < tore_gegentornation)
                     {
                         gegentornationPunkte += 3;

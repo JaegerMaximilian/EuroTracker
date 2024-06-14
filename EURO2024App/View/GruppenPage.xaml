@@ -77,6 +77,7 @@
                                             <DataTemplate x:DataType="model:Nation">
                                                 <Frame>
                                                     <StackLayout Orientation="Vertical" HorizontalOptions="Center" FlexLayout.Basis="20%">
+                                                        <Label Text="Sp." FontSize="Micro"/>
                                                         <Label Text="{Binding Spiele.Count}" FontSize="Small" VerticalTextAlignment="Center"/>
                                                     </StackLayout>
                                                 </Frame>
@@ -89,6 +90,7 @@
                                             <DataTemplate x:DataType="model:Nation">
                                                 <Frame>
                                                     <StackLayout Orientation="Vertical" HorizontalOptions="Center" FlexLayout.Basis="20%">
+                                                        <Label Text="+/-" FontSize="Micro"/>
                                                         <Label Text="{Binding Torverhältnis}" FontSize="Small" VerticalTextAlignment="Center"/>
                                                     </StackLayout>
                                                 </Frame>
@@ -101,6 +103,7 @@
                                             <DataTemplate x:DataType="model:Nation">
                                                 <Frame>
                                                     <StackLayout Orientation="Vertical" HorizontalOptions="Center" FlexLayout.Basis="20%">
+                                                        <Label Text="Pkt." FontSize="Micro"/>
                                                         <Label Text="{Binding Punkte}" FontSize="Small" VerticalTextAlignment="Center"/>
                                                     </StackLayout>
                                                 </Frame>
