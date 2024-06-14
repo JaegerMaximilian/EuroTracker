@@ -25,7 +25,7 @@ namespace EURO2024App.ViewModels
         {
             Title = "Gruppen";
             this.euroAPIservice = euroAPIservice;
-            IsRefreshing = true;
+            IsBusy = true;
         }
 
         [RelayCommand]
@@ -61,7 +61,7 @@ namespace EURO2024App.ViewModels
         {
             Gruppen.Clear();
             await GetGruppenAsync();
-            IsRefreshing = false;
+            IsBusy = false;
         }
 
     }

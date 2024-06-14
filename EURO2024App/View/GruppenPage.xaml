@@ -7,35 +7,53 @@
              x:DataType="viewmodels:GruppenViewModel"
              x:Name="GruppenView1"
              Title="{Binding Title}">
-  
+
     <Grid
         ColumnDefinitions="*,*"
         ColumnSpacing="5"
         RowDefinitions="*,Auto"
         RowSpacing="0">
         <RefreshView Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:GruppenViewModel}}, Path=ReloadGruppenCommand}"
-                         Grid.ColumnSpan="2"
-                         IsRefreshing="{Binding IsBusy}">
+                     Grid.ColumnSpan="2"
+                     IsRefreshing="{Binding IsBusy}">
 
-                <CollectionView 
-                    ItemsSource="{Binding Gruppen}"
-                    SelectionMode="None">
+            <CollectionView 
+                ItemsSource="{Binding Gruppen}"
+                SelectionMode="None">
 
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Gruppe">
+                        <Frame CornerRadius="10" Padding="10" Margin="10">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
 
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="model:Gruppe">
-                            <Frame HeightRequest="125">
-                                
-                                <Label Text="{Binding Id}" FontSize="Medium" VerticalTextAlignment="Center"/>
-                            </Frame>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </RefreshView>
+                                <StackLayout Orientation="Horizontal" Grid.Row="0" VerticalOptions="Center">
+                                    <Label Text="Gruppe:" FontSize="Medium" FontAttributes="Bold"/>
+                                    <Label Text="{Binding Name}" FontSize="Medium" Margin="5,0,0,0"/>
+                                </StackLayout>
 
+                                <CollectionView Grid.Row="1" ItemsSource="{Binding Nationen}" SelectionMode="None">
+                                    
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="model:Nation">
+                                            <Frame CornerRadius="5" Padding="5">
+                                                <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                                                    <Image Source="{Binding LogoLink}" WidthRequest="50" HeightRequest="30"/>
+                                                    <Label Text="{Binding Name}" FontSize="Small" VerticalOptions="Center" Margin="10,0,0,0"/>
+                                                </StackLayout>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
 
-            
-
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
     </Grid>
-
 </ContentPage>
