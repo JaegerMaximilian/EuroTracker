@@ -8,14 +8,15 @@
              x:Name="GamesView1"
              Title="{Binding Title}">
 
-    <Grid
+
+        <Grid
         ColumnDefinitions="*,*"
         ColumnSpacing="5"
         RowDefinitions="*,Auto"
         RowSpacing="50">
         <RefreshView Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:GamesViewModel}}, Path=ReloadGamesCommand}"
                          Grid.ColumnSpan="2"
-                         IsRefreshing="{Binding IsRefreshing}">
+                         IsRefreshing="{Binding IsBusy}">
 
             <CollectionView 
                     ItemsSource="{Binding Games}"
@@ -32,9 +33,9 @@
                                         CommandParameter="{Binding .}"/>
                             </Frame.GestureRecognizers>
 
-                            <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                            <!--<StackLayout Orientation="Horizontal" VerticalOptions="Center">
                                 <Label Text="{Binding GruppeString}" IsVisible="{Binding Gruppenphase}" FontSize="Title" VerticalTextAlignment="Center"/>
-                            </StackLayout>
+                            </StackLayout>-->
                             
                             <HorizontalStackLayout Spacing="10">
 

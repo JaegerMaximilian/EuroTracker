@@ -29,7 +29,7 @@ namespace EURO2024App.ViewModels
         string _kommentar;
 
         [ObservableProperty]
-        int _torNationId;
+        Nation selectedNation;
 
         [RelayCommand]
         public async void CreateEreignis()
@@ -40,6 +40,10 @@ namespace EURO2024App.ViewModels
                 await euroAPIService.CreateEvent(ereignis);
 
                 Spiel spiel = await euroAPIService.GetSpiel(ereignis.SpielId);
+                foreach (var nation in spiel.Nationen)
+                {
+                    nation.ToreImSpiel = nation.TorEreginisse.Count(e => e.SpielId == spiel.Id);
+                }
 
                 await Shell.Current.GoToAsync(nameof(EventPage), true, new Dictionary<string, object>
                 {
@@ -50,7 +54,17 @@ namespace EURO2024App.ViewModels
             }
             catch
             {
-                //Shell.Current.ShowPopup(new ErrorPopupView(ex, "Error Adding Event"));
+                
+                Spiel spiel = await euroAPIService.GetSpiel(_game.Id);
+
+                foreach (var nation in spiel.Nationen)
+                {
+                    nation.ToreImSpiel = nation.TorEreginisse.Count(e => e.SpielId == spiel.Id);
+                }
+                await Shell.Current.GoToAsync(nameof(EventPage), true, new Dictionary<string, object>
+                {
+                    { "Game", spiel }
+                });
 
             }
 
@@ -62,7 +76,11 @@ namespace EURO2024App.ViewModels
             spielereignis.Minute = Minute;
             spielereignis.Kommentar = Kommentar;
             spielereignis.SpielId = Game.Id;
-            spielereignis.TorNationId = TorNationId;
+            if(selectedNation != null)
+            {
+                spielereignis.TorNationId = selectedNation.Id;
+            }
+            
 
             return spielereignis;
         }

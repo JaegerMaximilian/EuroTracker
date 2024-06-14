@@ -15,7 +15,7 @@ namespace Euro24Tracker.Types
 
         public Gruppe()
         {
-            Id = 0;
+            
             Name = "";
         }
 

@@ -2,11 +2,6 @@
 using CommunityToolkit.Mvvm.Input;
 using EURO2024App.Services;
 using EURO2024App.View;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EURO2024App.ViewModels
 {
@@ -19,13 +14,18 @@ namespace EURO2024App.ViewModels
         public EventViewModel(EuroAPIService euroAPIService)
         {
             Title = "Spiel";
-            this.euroAPIservice = euroAPIservice;
+            this.euroAPIservice = new EuroAPIService();
+            
+            
         }
 
         [ObservableProperty]
         Spiel _game;
 
-        [RelayCommand]
+
+       
+
+    [RelayCommand]
         public async Task AddEvent()
         {
             await Shell.Current.GoToAsync(nameof(AddEventPage),true, new Dictionary<string, object>
@@ -35,11 +35,25 @@ namespace EURO2024App.ViewModels
         }
 
         [RelayCommand]
-        public async Task BackGames()
+        public async Task BackToGames()
         {
-            await Shell.Current.GoToAsync(nameof(GamePage),true);
+            
+            await Shell.Current.GoToAsync(nameof(GamePage),false);
+        }
+
+        [RelayCommand]
+        public async Task Refresh(Spiel game)
+        {
+            _game = await euroAPIservice.GetSpiel(game.Id);
+            _game.GruppeString = _game.Nationen.ElementAtOrDefault(0).Gruppe.Name;
+            foreach (var nation in _game.Nationen)
+            {
+                nation.ToreImSpiel = nation.TorEreginisse.Count(e => e.SpielId == _game.Id);
+            }
+            _game.Ereignisse = _game.Ereignisse.OrderBy(e => e.Minute).ToList();
+            IsBusy = false;
         }
 
 
-        }
+    }
 }

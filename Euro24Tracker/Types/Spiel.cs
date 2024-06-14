@@ -18,7 +18,7 @@ namespace Euro24Tracker.Types
 
         public Spiel()
         {
-            Id = 0;
+            
             Stadion = "";
             Gruppenphase = true;
 
