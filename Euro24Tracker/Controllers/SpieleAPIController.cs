@@ -49,7 +49,9 @@ namespace Euro24Tracker.Controllers
                 //.ThenInclude(e => e.Gruppe)
                 .Include(e => e.Ereignisse).ToListAsync();
 
-          
+           
+
+
             return spiele;
         }
 

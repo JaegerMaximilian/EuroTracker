@@ -8,6 +8,17 @@ using Newtonsoft.Json;
 using System.Net.Http;
 using System.IO;
 using System.Reflection;
+using System.Net.Http.Json;
+using System.Text.Json.Serialization;
+
+
+using System.Text.Json.Serialization;
+using System.Text.Json;
+
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Net.Http.Json;
+using System.Text;
 
 namespace EURO2024App.Services
 {
@@ -75,9 +86,15 @@ namespace EURO2024App.Services
 
         }
 
-        public async Task CreateEvent(object newobject)
+        public async Task CreateEvent(Ereignis ereignis)
         {
-
+            if(ereignis.TorNationId == 0)
+            {
+                ereignis.TorNationId = null;
+            }
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync(BaseApiAdress + "/ereignisse/create", ereignis);
+            response.EnsureSuccessStatusCode();
+            string responseBody = await response.Content.ReadAsStringAsync();
         }
 
 
