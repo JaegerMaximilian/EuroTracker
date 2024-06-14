@@ -12,7 +12,7 @@
         ColumnDefinitions="*,*"
         ColumnSpacing="5"
         RowDefinitions="*,Auto"
-        RowSpacing="0">
+        RowSpacing="50">
         <RefreshView Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:GruppenViewModel}}, Path=ReloadGruppenCommand}"
                      Grid.ColumnSpan="2"
                      IsRefreshing="{Binding IsBusy}">
@@ -23,7 +23,7 @@
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Gruppe">
-                        <Frame CornerRadius="10" Padding="10" Margin="10">
+                        <Frame CornerRadius="10" Padding="10" Margin="100">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -41,7 +41,9 @@
                                         <DataTemplate x:DataType="model:Nation">
                                             <Frame CornerRadius="5" Padding="5">
                                                 <StackLayout Orientation="Horizontal" VerticalOptions="Center">
-                                                    <Image Source="{Binding LogoLink}" WidthRequest="50" HeightRequest="30"/>
+                                                    <Frame WidthRequest="50" HeightRequest="50" CornerRadius="25" IsClippedToBounds="True" Padding="0">
+                                                        <Image Source="{Binding LogoLink}" WidthRequest="50" HeightRequest="50"/>
+                                                    </Frame>
                                                     <Label Text="{Binding Name}" FontSize="Small" VerticalOptions="Center" Margin="10,0,0,0"/>
                                                 </StackLayout>
                                             </Frame>

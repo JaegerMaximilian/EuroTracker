@@ -34,7 +34,11 @@ namespace EURO2024App.ViewModels
             });
         }
 
-        
+        [RelayCommand]
+        public async Task BackGames()
+        {
+            await Shell.Current.GoToAsync(nameof(GamePage),true);
+        }
 
 
         }

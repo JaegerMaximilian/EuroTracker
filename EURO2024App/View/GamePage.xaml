@@ -7,12 +7,12 @@
              x:DataType="viewmodels:GamesViewModel"
              x:Name="GamesView1"
              Title="{Binding Title}">
-  
+
     <Grid
         ColumnDefinitions="*,*"
         ColumnSpacing="5"
         RowDefinitions="*,Auto"
-        RowSpacing="0">
+        RowSpacing="50">
         <RefreshView Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:GamesViewModel}}, Path=ReloadGamesCommand}"
                          Grid.ColumnSpan="2"
                          IsRefreshing="{Binding IsRefreshing}">
@@ -20,46 +20,80 @@
             <CollectionView 
                     ItemsSource="{Binding Games}"
                     SelectionMode="None">
-
+                
+                
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Spiel">
-                        <Frame HeightRequest="125">
+                        <Frame>
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:GamesViewModel}}, Path=GoToGameDetailsCommand}"
                                         CommandParameter="{Binding .}"/>
                             </Frame.GestureRecognizers>
+
+                            <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                                <Label Text="{Binding GruppeString}" IsVisible="{Binding Gruppenphase}" FontSize="Title" VerticalTextAlignment="Center"/>
+                            </StackLayout>
+                            
                             <HorizontalStackLayout Spacing="10">
-                                <VerticalStackLayout>
-                                    <Label Text="ID" FontSize="Micro"/>
-                                    <Label Text="{Binding Id}" FontSize="Medium" VerticalTextAlignment="Center"/>
-                                </VerticalStackLayout>
-                                <VerticalStackLayout>
-                                    <Label Text="Stadion" FontSize="Micro"/>
-                                    <Label Text="{Binding Stadion}" FontSize="Medium" VerticalTextAlignment="Center"/>
-                                </VerticalStackLayout>
-                                <VerticalStackLayout>
-                                    <Label Text="Gruppenphase" FontSize="Micro"/>
-                                    <CheckBox   IsChecked="{Binding Gruppenphase}" />
-                                </VerticalStackLayout>
 
                                 <CollectionView
-                                    ItemsSource="{Binding Nationen}"
-                                    SelectionMode="None">
-                                    
+                                     ItemsSource="{Binding Nationen}"
+                                     SelectionMode="None">  
+
                                     <CollectionView.ItemTemplate>
                                         <DataTemplate x:DataType="model:Nation">
-                                            <Frame>
-                                                <VerticalStackLayout>
-                                                    <Label Text="{Binding ShortName}"/>
-                                                </VerticalStackLayout>
-                                            </Frame>
+                                            <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                                                <Frame WidthRequest="30" HeightRequest="30" CornerRadius="15"  Padding="0">
+                                                    <Image Source="{Binding LogoLink}" WidthRequest="30" HeightRequest="30"/>
+                                                </Frame>
+                                                <Label Text="{Binding Name}" FontSize="Small" VerticalOptions="Center" Margin="10,0,0,0"/>
+                                                
+
+                                            </StackLayout>
+
                                         </DataTemplate>
                                     </CollectionView.ItemTemplate>
                                 </CollectionView>
 
-                                            
+                                <CollectionView
+                                     ItemsSource="{Binding Nationen}"
+                                     SelectionMode="None">          
+
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="model:Nation">
+                                            <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                                                
+                                                <Label Text="{Binding ToreImSpiel}" FontSize="Small" WidthRequest="30" HeightRequest="30" VerticalOptions="Center" Margin="10,0,0,0"/>
+
+
+                                            </StackLayout>
+
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+
+
+
+
+                                <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+                                    <Label Text="|" FontSize="Title" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+                                    <Label Text="Start" FontSize="Micro"/>
+                                    <Label Text="{Binding Datetime}" FontSize="Small" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+
+                                    <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+                                    <Label Text="Stadion" FontSize="Micro"/>
+                                    <Label Text="{Binding Stadion}" FontSize="Small" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+                               
+
+
+
                             </HorizontalStackLayout>
                         </Frame>
                     </DataTemplate>
@@ -69,6 +103,8 @@
 
     </Grid>
 
-   
+
 
 </ContentPage>
+
+

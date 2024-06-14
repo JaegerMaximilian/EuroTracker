@@ -10,6 +10,7 @@ namespace Euro24Tracker.Types
         public string Stadion { get; set; }
         public bool Gruppenphase { get; set; }
 
+        public DateTime Datetime { get; set; }
 
         // Navigation Properties
         public ICollection<Nation> Nationen { get; set; } = new List<Nation>();

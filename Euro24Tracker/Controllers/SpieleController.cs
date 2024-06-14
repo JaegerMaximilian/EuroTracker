@@ -60,7 +60,7 @@ namespace Euro24Tracker.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Stadion,Gruppenphase, Nationen, Ereignisse")] Spiel spiel, int[] SelectedNationendIds)
+        public async Task<IActionResult> Create([Bind("Id,Stadion,Gruppenphase, Datetime, Nationen, Ereignisse")] Spiel spiel, int[] SelectedNationendIds)
         {
            spiel.Nationen = (spiel.Nationen  == null) ? new List<Nation>() : spiel.Nationen;
 
