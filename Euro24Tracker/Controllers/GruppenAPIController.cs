@@ -37,7 +37,10 @@ namespace Euro24Tracker.Controllers
         [Route("List")]
         public async Task<List<Gruppe>> ListGruppe()
         {
-            return await _context.Gruppen.Include(e => e.Nationen).ToListAsync();
+            return await _context.Gruppen
+                .Include(e => e.Nationen)
+                    .ThenInclude(e=>e.Spiele)
+                 .ToListAsync();
         }
 
 

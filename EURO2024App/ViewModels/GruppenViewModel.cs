@@ -25,6 +25,7 @@ namespace EURO2024App.ViewModels
         {
             Title = "Gruppen";
             this.euroAPIservice = euroAPIservice;
+            //IsBusy = true;
         }
 
         [RelayCommand]
@@ -37,8 +38,11 @@ namespace EURO2024App.ViewModels
                 List<Gruppe> gruppen = new();
                 gruppen = await euroAPIservice.GetGruppen();
 
+
                 foreach (Gruppe gruppe in gruppen)
                 {
+                   
+                    gruppe.Nationen.OrderByDescending(e => e.Punkte).OrderBy(e => e.Torverhältnis);
                     Gruppen.Add(gruppe);
                 }
 
@@ -60,7 +64,7 @@ namespace EURO2024App.ViewModels
         {
             Gruppen.Clear();
             await GetGruppenAsync();
-
+            IsBusy = false;
         }
 
     }

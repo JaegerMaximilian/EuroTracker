@@ -24,7 +24,7 @@
             <ShellContent Title="Games"
                           Icon="dotnet_bot.png"
                           Route="GamePage"
-                          ContentTemplate="{DataTemplate views:GamePage}" />    
+                          ContentTemplate="{DataTemplate views:GamesPage}" />    
         </Tab>
 
         <Tab Title="Groups"

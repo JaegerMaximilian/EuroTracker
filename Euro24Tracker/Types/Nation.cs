@@ -11,10 +11,10 @@ namespace Euro24Tracker.Types
 
         public string? Name { get; set; }
         public string LogoLink { get; set; }
-        public int? Punkte { get; set; }
-        public int? Tore {  get; set; }
-        public int? Gegentore { get; set; }
-        public int? Torverhältnis { get; set; }
+        public int? Punkte { get; set; } = 0;
+        public int? Tore { get; set; } = 0;
+        public int? Gegentore { get; set; } = 0;
+        public int? Torverhältnis { get; set; } = 0;
 
 
         // Navigation Properties
@@ -26,9 +26,13 @@ namespace Euro24Tracker.Types
 
         public Nation()
         {
-            Id = 0;
+            
             ShortName = "";
             LogoLink = "";
+            Punkte = 0;
+            Tore = 0;
+            Gegentore = 0;
+            Torverhältnis = 0;
         }
 
 

@@ -18,11 +18,15 @@ namespace EURO2024App.Model
 
 
         // Navigation Properties
-        public int? GruppeId { get; set; }
-        public Gruppe? Gruppe { get; set; }
+        public int GruppeId { get; set; }
+        public Gruppe Gruppe { get; set; }
 
         public ICollection<Ereignis>? TorEreginisse { get; set; }
         public ICollection<Spiel>? Spiele { get; set; }
+
+        public int? ToreImSpiel { get; set; }
+
+
 
 
 

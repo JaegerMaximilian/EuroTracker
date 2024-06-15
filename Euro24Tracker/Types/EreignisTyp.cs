@@ -14,7 +14,7 @@ namespace Euro24Tracker.Types
 
         public EreignisTyp()
         {
-            Id = 0;
+            
             Name = "";
             ImageLink = "";
         }

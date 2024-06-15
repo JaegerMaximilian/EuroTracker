@@ -22,7 +22,7 @@ namespace Euro24Tracker.Controllers
         // GET: Spiele
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Spiele.Include(e => e.Nationen).ToListAsync());
+            return View(await _context.Spiele.Include(e=>e.Nationen).ToListAsync());
         }
 
         // GET: Spiele/Details/5
@@ -33,7 +33,7 @@ namespace Euro24Tracker.Controllers
                 return NotFound();
             }
 
-            var spiel = await _context.Spiele.Include(e=>e.Nationen)
+            var spiel = await _context.Spiele.Include(e => e.Nationen)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (spiel == null)
             {
@@ -51,7 +51,6 @@ namespace Euro24Tracker.Controllers
                 Value = a.Id.ToString(),
                 Text = a.ShortName
             }).ToList();
-
             return View();
         }
 
@@ -60,9 +59,9 @@ namespace Euro24Tracker.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Stadion,Gruppenphase, Nationen, Ereignisse")] Spiel spiel, int[] SelectedNationendIds)
+        public async Task<IActionResult> Create([Bind("Id,Stadion,Gruppenphase, Datetime, Nationen, Ereignisse")] Spiel spiel, int[] SelectedNationendIds)
         {
-           spiel.Nationen = (spiel.Nationen  == null) ? new List<Nation>() : spiel.Nationen;
+            spiel.Nationen = (spiel.Nationen == null) ? new List<Nation>() : spiel.Nationen;
 
             if (ModelState.IsValid)
             {
@@ -100,23 +99,23 @@ namespace Euro24Tracker.Controllers
             }
 
             var spiel = await _context.Spiele.FindAsync(id);
-
-            ViewBag.Nationen = _context.Nationen.Select(a => new SelectListItem
-            {
-                Value = a.Id.ToString(), 
-                Text = a.ShortName 
-            }).ToList();
-
-            ViewBag.SpielNation = _context.SpielNation.Select(a => new SelectListItem
-            {
-                Value = a.SpielId.ToString(), 
-                Text = a.NationId.ToString(), 
-            }).ToList();
-
             if (spiel == null)
             {
                 return NotFound();
             }
+            ViewBag.Nationen = _context.Nationen.Select(a => new SelectListItem
+            {
+                Value = a.Id.ToString(),
+                Text = a.ShortName
+            }).ToList();
+
+            ViewBag.SpielNation = _context.SpielNation.Select(a => new SelectListItem
+            {
+                Value = a.SpielId.ToString(),
+                Text = a.NationId.ToString(),
+            }).ToList();
+
+
             return View(spiel);
         }
 
@@ -125,7 +124,7 @@ namespace Euro24Tracker.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Stadion,Gruppenphase,Nationen,Ereignisse")] Spiel spiel, int[] SelectedNationendIds)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Stadion,Gruppenphase,Datetime,Nationen,Ereignisse")] Spiel spiel, int[] SelectedNationendIds)
         {
             if (id != spiel.Id)
             {

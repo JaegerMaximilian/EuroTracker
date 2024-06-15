@@ -7,16 +7,31 @@
              x:DataType="viewmodels:AddEventViewModel"
              x:Name="AddEventView1"
              Title="{Binding Title}">
+    
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding BackCommand}"
+                         />
+    </Shell.BackButtonBehavior>
 
-    <StackLayout Padding="20">
+    <ScrollView>
+        <StackLayout Margin="10">
 
-        <Entry Placeholder="Minute" Keyboard="Numeric" x:Name="MinuteEntry" Text="{Binding Minute}" />
+            <Entry Placeholder="Minute" Keyboard="Numeric" x:Name="MinuteEntry" Text="{Binding Minute}" />
         <Entry Placeholder="Kommentar" x:Name="CommentEntry" Text="{Binding Kommentar}" />
-        <Entry Placeholder="Tor Nation Id" Keyboard="Numeric" x:Name="TorNationEntry" Text="{Binding TorNationId}" />
-      
-        
-        <Button Text="Confirm" Command="{Binding CreateEreignisCommand}"/>
+        <Picker Title="Tor für ..."
+                ItemsSource="{Binding Game.Nationen}"
+                ItemDisplayBinding="{Binding Name}"
+                SelectedItem="{Binding SelectedNation}" 
+                Margin="100"/>
+        <!--<Entry Placeholder="Tor Nation Id" Keyboard="Numeric" x:Name="TorNationEntry" Text="{Binding TorNationId}" />-->
 
-    </StackLayout>
+
+
+            <Button Text="Confirm" Command="{Binding CreateEreignisCommand}"/>
+        </StackLayout>
+       
+    </ScrollView>
+
+           
 
 </ContentPage>

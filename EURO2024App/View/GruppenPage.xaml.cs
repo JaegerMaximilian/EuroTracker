@@ -18,7 +18,7 @@ public partial class GruppenPage : ContentPage
         base.OnAppearing();
         if (BindingContext is GruppenViewModel viewModel)
         {
-            //await viewModel.ReloadTeamsCommand.ExecuteAsync(null);
+            await viewModel.ReloadGruppenCommand.ExecuteAsync(null);
         }
     }
 }

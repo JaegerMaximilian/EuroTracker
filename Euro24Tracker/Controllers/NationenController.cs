@@ -48,7 +48,13 @@ namespace Euro24Tracker.Controllers
         // GET: Nationen/Create
         public IActionResult Create()
         {
-            ViewData["GruppeId"] = new SelectList(_context.Gruppen, "Id", "Id");
+            ViewBag.Nationen = _context.Gruppen.Select(a => new SelectListItem
+            {
+                Value = a.Id.ToString(),
+                Text = a.Name
+            }).ToList();
+
+            //ViewData["GruppeId"] = new SelectList(_context.Gruppen, "Id", "Id");
             return View();
         }
 
@@ -57,10 +63,12 @@ namespace Euro24Tracker.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ShortName,Name,LogoLink,Punkte,Tore,Gegentore,Torverhältnis,GruppeId")] Nation nation)
+        public async Task<IActionResult> Create([Bind("Id,ShortName,Name,LogoLink,Punkte,Tore,Gegentore,Torverhältnis,GruppeId")] Nation nation, int SelectedGruppeId)
         {
             if (ModelState.IsValid)
             {
+                nation.GruppeId = SelectedGruppeId;
+                nation.Gruppe = _context.Gruppen.FirstOrDefault(a => a.Id == SelectedGruppeId);
                 _context.Add(nation);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -82,7 +90,20 @@ namespace Euro24Tracker.Controllers
             {
                 return NotFound();
             }
-            ViewData["GruppeId"] = new SelectList(_context.Gruppen, "Id", "Id", nation.GruppeId);
+
+            ViewBag.GruppenNationen = _context.Nationen.Include(e=>e.Gruppe).Select(a => new SelectListItem
+            {
+                Value = a.Id.ToString(),
+                Text = a.GruppeId.ToString(),
+            }).ToList();
+
+            ViewBag.Gruppen = _context.Gruppen.Select(a => new SelectListItem
+            {
+                Value = a.Id.ToString(),
+                Text = a.Name
+            }).ToList();
+
+            //ViewData["GruppeId"] = new SelectList(_context.Gruppen, "Id", "Id", nation.GruppeId);
             return View(nation);
         }
 
@@ -91,7 +112,7 @@ namespace Euro24Tracker.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ShortName,Name,LogoLink,Punkte,Tore,Gegentore,Torverhältnis,GruppeId")] Nation nation)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ShortName,Name,LogoLink,Punkte,Tore,Gegentore,Torverhältnis,GruppeId")] Nation nation, int SelectedGruppeId)
         {
             if (id != nation.Id)
             {
@@ -102,6 +123,8 @@ namespace Euro24Tracker.Controllers
             {
                 try
                 {
+                    nation.GruppeId = SelectedGruppeId;
+                    nation.Gruppe = _context.Gruppen.FirstOrDefault(a => a.Id == SelectedGruppeId);
                     _context.Update(nation);
                     await _context.SaveChangesAsync();
                 }
