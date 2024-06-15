@@ -11,10 +11,10 @@
         {
             Routing.RegisterRoute(nameof(View.InfoPage), typeof(View.InfoPage));
             Routing.RegisterRoute(nameof(View.StadiumPage), typeof(View.StadiumPage));
-            Routing.RegisterRoute(nameof(View.GamePage), typeof(View.GamePage));
             Routing.RegisterRoute(nameof(View.EventPage), typeof(View.EventPage));
             Routing.RegisterRoute(nameof(View.GruppenPage), typeof(View.GruppenPage));
             Routing.RegisterRoute(nameof(View.AddEventPage), typeof(View.AddEventPage));
+            Routing.RegisterRoute(nameof(View.GamesPage), typeof(View.GamesPage));
         }
     }
 }

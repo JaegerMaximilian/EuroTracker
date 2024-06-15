@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EURO2024App.View.GamesPage"
+             xmlns:viewmodels="clr-namespace:EURO2024App.ViewModels"
+             xmlns:model="clr-namespace:EURO2024App.Model"
+             x:DataType="viewmodels:GamesViewModel"
+             x:Name="GamesPage1"
+             Title="{Binding Title}">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False" />
+    </Shell.BackButtonBehavior>
+    
+    <Grid
+        ColumnDefinitions="*,*"
+        ColumnSpacing="5"
+        RowDefinitions="*,Auto"
+        RowSpacing="50">
+        <RefreshView Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:GamesViewModel}}, Path=ReloadGamesCommand}"
+                     Grid.ColumnSpan="2"
+                     IsRefreshing="{Binding IsBusy}">
+
+            <CollectionView 
+                ItemsSource="{Binding Games}"
+                SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Spiel">
+                        <Frame>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:GamesViewModel}}, Path=GoToGameDetailsCommand}"
+                                    CommandParameter="{Binding .}"/>
+                            </Frame.GestureRecognizers>
+                            <Grid>
+                                <!-- Layout-Element um den Inhalt zu gruppieren -->
+                                <HorizontalStackLayout Spacing="10">
+
+                                    <CollectionView
+                                        ItemsSource="{Binding Nationen}"
+                                        SelectionMode="None">
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate x:DataType="model:Nation">
+                                                <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                                                    <Frame WidthRequest="30" HeightRequest="30" CornerRadius="15" Padding="0">
+                                                        <Image Source="{Binding LogoLink}" WidthRequest="30" HeightRequest="30"/>
+                                                    </Frame>
+                                                    <Label Text="{Binding Name}" FontSize="Small" VerticalOptions="Center" Margin="10,0,0,0"/>
+                                                </StackLayout>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+
+                                    <CollectionView
+                                        ItemsSource="{Binding Nationen}"
+                                        SelectionMode="None">
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate x:DataType="model:Nation">
+                                                <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                                                    <Label Text="{Binding ToreImSpiel}" FontSize="Small" WidthRequest="30" HeightRequest="30" VerticalOptions="Center" Margin="10,0,0,0"/>
+                                                </StackLayout>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+
+                                    <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+                                        <Label Text="|" FontSize="Title" VerticalTextAlignment="Center"/>
+                                    </StackLayout>
+
+                                    <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+                                        <Label Text="Start" FontSize="Micro"/>
+                                        <Label Text="{Binding Datetime}" FontSize="Small" VerticalTextAlignment="Center"/>
+                                    </StackLayout>
+
+                                    <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+                                        <Label Text="Stadion" FontSize="Micro"/>
+                                        <Label Text="{Binding Stadion}" FontSize="Small" VerticalTextAlignment="Center"/>
+                                    </StackLayout>
+
+                                </HorizontalStackLayout>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </Grid>
+</ContentPage>

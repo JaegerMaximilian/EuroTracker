@@ -92,6 +92,7 @@ namespace EURO2024App.ViewModels
             {
                 { "Game", Game}
             });
+           
         }
     }
 

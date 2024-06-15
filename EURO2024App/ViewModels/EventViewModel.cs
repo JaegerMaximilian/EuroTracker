@@ -38,7 +38,7 @@ namespace EURO2024App.ViewModels
         public async Task BackToGames()
         {
             
-            await Shell.Current.GoToAsync(nameof(GamePage),false);
+            await Shell.Current.GoToAsync(nameof(GamesPage),true);
         }
 
         [RelayCommand]

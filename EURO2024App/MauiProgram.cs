@@ -30,7 +30,7 @@ namespace EURO2024App
             builder.Services.AddTransient<EventViewModel>();
             builder.Services.AddTransient<AddEventViewModel>();
 
-            builder.Services.AddSingleton<GamePage>();
+            builder.Services.AddSingleton<GamesPage>();
             builder.Services.AddTransient<EventPage>();
             builder.Services.AddTransient<AddEventPage>();
 

@@ -8,10 +8,10 @@
              x:Name="EventView1"
              Title="{Binding Title}">
 
-    <!--<Shell.BackButtonBehavior>
+    <Shell.BackButtonBehavior>
         <BackButtonBehavior Command="{Binding BackToGamesCommand}"
                  />
-    </Shell.BackButtonBehavior>-->
+    </Shell.BackButtonBehavior>
 
     <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsBusy}" CommandParameter="{Binding Game}">
         <ScrollView>

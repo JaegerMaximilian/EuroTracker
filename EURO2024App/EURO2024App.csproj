@@ -96,10 +96,10 @@
 	  <MauiXaml Update="View\GameDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\GruppenPage.xaml">
+	  <MauiXaml Update="View\GamesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\GamePage.xaml">
+	  <MauiXaml Update="View\GruppenPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\InfoPage.xaml">
