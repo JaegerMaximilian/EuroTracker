@@ -67,17 +67,14 @@ namespace Euro24Tracker
 
             
 
-            string relativePath = "EURO2024App/port.txt";
-            string port = app.Configuration.AsEnumerable().ToArray()[94].ToString().Split(',')[1].Trim(new char[] { ' ', ']' });
-            string currentDirectory = Environment.CurrentDirectory;
-            string parentDirectory = Directory.GetParent(currentDirectory).FullName;
+            //string relativePath = "EURO2024App/port.txt";
+            //string port = app.Configuration.AsEnumerable().ToArray()[94].ToString().Split(',')[1].Trim(new char[] { ' ', ']' });
+            //string currentDirectory = Environment.CurrentDirectory;
+            //string parentDirectory = Directory.GetParent(currentDirectory).FullName;
 
+            //string fullPath = Path.Combine(parentDirectory, relativePath);
 
-            string fullPath = Path.Combine(parentDirectory, relativePath);
-
-            
-
-            File.WriteAllText(fullPath, port);
+            //File.WriteAllText(fullPath, port);
 
        
 

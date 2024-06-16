@@ -2,11 +2,10 @@
 using CommunityToolkit.Mvvm.Input;
 using EURO2024App.Services;
 using EURO2024App.View;
-using System;
+using Euro24Tracker.Types;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace EURO2024App.ViewModels
@@ -14,27 +13,42 @@ namespace EURO2024App.ViewModels
     [QueryProperty(nameof(Game), "Game")]
     public partial class AddEventViewModel : BaseViewModel
     {
-        EuroAPIService euroAPIService;
+        private readonly EuroAPIService euroAPIService;
+
         public ObservableCollection<EreignisTyp> EreignisTypen { get; } = new();
+
         public AddEventViewModel(EuroAPIService euroAPIService)
         {
             this.euroAPIService = euroAPIService;
         }
 
         [ObservableProperty]
-        Spiel _game;
+        private Spiel game;
 
         [ObservableProperty]
-        int _minute;
+        private int minute;
 
         [ObservableProperty]
-        string _kommentar;
+        private string kommentar;
 
         [ObservableProperty]
-        EreignisTyp selectedEreignisTyp;
+        private EreignisTyp selectedEreignisTyp;
 
         [ObservableProperty]
-        Nation selectedNation;
+        private Nation selectedNation;
+
+        partial void OnSelectedNationChanged(Nation value)
+        {
+            LoadPlayersForSelectedNation();
+        }
+
+        [ObservableProperty]
+        private Spieler selectedSpieler;
+
+        public ObservableCollection<Spieler> Players { get; } = new();
+
+        [ObservableProperty]
+        private bool isPlayerPickerVisible;
 
         [RelayCommand]
         public async void CreateEreignis()
@@ -54,43 +68,41 @@ namespace EURO2024App.ViewModels
                 {
                     { "Game", spiel }
                 });
-                //await Shell.Current.GoToAsync(nameof(EventPage), true);
-
             }
             catch
             {
-                
-                Spiel spiel = await euroAPIService.GetSpiel(_game.Id);
+                Spiel spiel = await euroAPIService.GetSpiel(Game.Id);
 
                 foreach (var nation in spiel.Nationen)
                 {
                     nation.ToreImSpiel = nation.TorEreginisse.Count(e => e.SpielId == spiel.Id);
                 }
+
                 await Shell.Current.GoToAsync(nameof(EventPage), true, new Dictionary<string, object>
                 {
                     { "Game", spiel }
                 });
-
             }
-
         }
 
         private Ereignis CreateEreignisForAPI()
         {
-            var spielereignis = new Ereignis();
-            spielereignis.Minute = Minute;
-            spielereignis.Kommentar = Kommentar;
-            spielereignis.SpielId = Game.Id;
+            var spielereignis = new Ereignis
+            {
+                Minute = Minute,
+                Kommentar = Kommentar,
+                SpielId = Game.Id
+            };
 
-            if(selectedNation != null)
+            if (SelectedNation != null)
             {
-                spielereignis.TorNationId = selectedNation.Id;
+                spielereignis.TorNationId = SelectedNation.Id;
             }
-            if(selectedEreignisTyp != null)
+
+            if (SelectedEreignisTyp != null)
             {
-                spielereignis.EreignisTypId = selectedEreignisTyp.Id;
+                spielereignis.EreignisTypId = SelectedEreignisTyp.Id;
             }
-            
 
             return spielereignis;
         }
@@ -98,14 +110,12 @@ namespace EURO2024App.ViewModels
         [RelayCommand]
         public async Task LoadEreignisTypen()
         {
-            List<EreignisTyp> ereignisTypen = new();
-            ereignisTypen = await euroAPIService.GetEreignisTypen();
+            List<EreignisTyp> ereignisTypen = await euroAPIService.GetEreignisTypen();
 
             foreach (EreignisTyp ereignisTyp in ereignisTypen)
             {
                 EreignisTypen.Add(ereignisTyp);
             }
-
         }
 
         [RelayCommand]
@@ -113,10 +123,23 @@ namespace EURO2024App.ViewModels
         {
             await Shell.Current.GoToAsync(nameof(EventPage), true, new Dictionary<string, object>
             {
-                { "Game", Game}
+                { "Game", Game }
             });
-           
+        }
+
+        private void LoadPlayersForSelectedNation()
+        {
+            Players.Clear();
+
+            if (SelectedNation != null)
+            {
+                foreach (var player in SelectedNation.Spieler)
+                {
+                    Players.Add(player);
+                }
+            }
+
+            IsPlayerPickerVisible = Players.Count > 0;
         }
     }
-
 }

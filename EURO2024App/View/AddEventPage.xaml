@@ -29,10 +29,16 @@
                 ItemDisplayBinding="{Binding Name}"
                 SelectedItem="{Binding SelectedNation}" 
                 Margin="0,0,0,20"/>
-        <!--<Entry Placeholder="Tor Nation Id" Keyboard="Numeric" x:Name="TorNationEntry" Text="{Binding TorNationId}" />-->
-        
-            
-           
+
+            <Picker Title="Select Player"
+                ItemsSource="{Binding Players}"
+                ItemDisplayBinding="{Binding Name}"
+                SelectedItem="{Binding SelectedSpieler}" 
+                Margin="0,0,0,20"
+                IsVisible="{Binding IsPlayerPickerVisible}"/>
+
+
+
 
 
             <Button Text="Confirm" Command="{Binding CreateEreignisCommand}"/>

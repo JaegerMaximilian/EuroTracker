@@ -28,7 +28,7 @@
                         <DataTemplate x:DataType="model:Nation">
                             <StackLayout Orientation="Horizontal" VerticalOptions="Center">
                                 <Frame WidthRequest="30" HeightRequest="30" CornerRadius="15" Padding="0">
-                                    <Image Source="{Binding LogoLink}" WidthRequest="30" HeightRequest="30"/>
+                                        <Image Source="{Binding LogoLink}" WidthRequest="30" HeightRequest="30" Aspect="AspectFill"/>
                                 </Frame>
                                 <Label Text="{Binding Name}" FontSize="Small" VerticalOptions="Center" Margin="10,0,0,0"/>
                             </StackLayout>
@@ -67,7 +67,7 @@
 
                                     <VerticalStackLayout>
                                         <Frame WidthRequest="30" HeightRequest="30" Padding="0">
-                                            <Image Source="{Binding EreignisTyp.ImageLink}" WidthRequest="30" HeightRequest="30"/>
+                                            <Image Source="{Binding EreignisTyp.ImageLink}" WidthRequest="30" HeightRequest="30" Aspect="AspectFill"/>
                                         </Frame>
                                     </VerticalStackLayout>
 
