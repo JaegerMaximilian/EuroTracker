@@ -14,6 +14,7 @@ namespace Euro24Tracker.Types
         // Navigation Properties
         public int NationId { get; set; }
         public Nation Nation { get; set; } = new Nation();
+        public ICollection<Ereignis>? TorEreignisse { get; set; }
 
         public Spieler()
         {

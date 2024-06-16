@@ -14,9 +14,11 @@
 
     <ScrollView>
         <StackLayout Margin="10">
-
+            <Label Text="Minute:" FontSize="Small" VerticalOptions="Center" Margin="0,0,0,0"/>
             <Entry Placeholder="Minute" Keyboard="Numeric" x:Name="MinuteEntry" Text="{Binding Minute}" />
-        <Entry Placeholder="Kommentar" x:Name="CommentEntry" Text="{Binding Kommentar}" />
+
+            <Label Text="Kommentar" FontSize="Small" VerticalOptions="Center" Margin="0,0,0,0"/>
+            <Entry Placeholder="Kommentar" x:Name="CommentEntry" Text="{Binding Kommentar}" />
 
          <Picker Title="Ereignis-Typ"
         ItemsSource="{Binding EreignisTypen}"

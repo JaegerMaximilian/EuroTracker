@@ -21,5 +21,9 @@ namespace Euro24Tracker.Types
 
         public int? TorNationId { get; set; }
         public Nation? TorNation { get; set; }
+
+        public int? TorschuetzeId { get; set; }
+        public Spieler? Torschuetze { get; set; }
+
     }
 }

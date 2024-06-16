@@ -15,6 +15,7 @@
             Routing.RegisterRoute(nameof(View.GruppenPage), typeof(View.GruppenPage));
             Routing.RegisterRoute(nameof(View.AddEventPage), typeof(View.AddEventPage));
             Routing.RegisterRoute(nameof(View.GamesPage), typeof(View.GamesPage));
+            Routing.RegisterRoute(nameof(View.StatistikPage), typeof(View.StatistikPage));
         }
     }
 }

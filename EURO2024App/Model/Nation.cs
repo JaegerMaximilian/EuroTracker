@@ -1,5 +1,4 @@
-﻿using Euro24Tracker.Types;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 
 namespace EURO2024App.Model

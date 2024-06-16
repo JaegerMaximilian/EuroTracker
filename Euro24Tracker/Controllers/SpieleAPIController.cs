@@ -44,16 +44,15 @@ namespace Euro24Tracker.Controllers
         {
             
 
-            var spiele =  await _context.Spiele
+            List<Spiel> spiele =  await _context.Spiele
                 .Include(e => e.Nationen)
                     .ThenInclude(e => e.Gruppe)
                 .Include(e => e.Nationen)
                     .ThenInclude(n => n.Spieler)
+                        .ThenInclude(n => n.TorEreignisse)
                 .Include(e => e.Ereignisse)
                     .ThenInclude(e => e.EreignisTyp)
                 .ToListAsync();
-
-           
 
 
             return spiele;
@@ -68,6 +67,7 @@ namespace Euro24Tracker.Controllers
                     .ThenInclude(e => e.Gruppe)
                  .Include(e => e.Nationen)
                     .ThenInclude(n => n.Spieler)
+                        .ThenInclude(n => n.TorEreignisse)
                 .Include(e => e.Ereignisse)
                     .ThenInclude(e => e.EreignisTyp)
                 .FirstOrDefaultAsync();

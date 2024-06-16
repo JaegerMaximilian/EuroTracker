@@ -36,6 +36,12 @@ namespace Euro24Tracker.Data
                 .WithMany(g => g.Spieler)
                 .HasForeignKey(n => n.NationId);
 
+            // 1:n Beziehung zwischen Spieler und Ereignis
+            modelBuilder.Entity<Ereignis>()
+                .HasOne(n => n.Torschuetze)
+                .WithMany(g => g.TorEreignisse)
+                .HasForeignKey(n => n.TorschuetzeId);
+
             // n:m Beziehung zwischen Spiel und Nation
             modelBuilder.Entity<SpielNation>()
                 .HasKey(sn => new { sn.SpielId, sn.NationId });

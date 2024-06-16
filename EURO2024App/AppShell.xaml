@@ -35,6 +35,14 @@
               ContentTemplate="{DataTemplate views:GruppenPage}" />
         </Tab>
 
+        <Tab Title="Statistics"
+      Icon="paw.png">
+            <ShellContent Title="Statistics"
+       Icon="dotnet_bot.png"
+       Route="GamePage"
+       ContentTemplate="{DataTemplate views:StatistikPage}" />
+        </Tab>
+
     </TabBar>
 
 </Shell>
