@@ -99,6 +99,27 @@ namespace EURO2024App.Services
 
         }
 
+        public async Task<List<EreignisTyp>> GetEreignisTypen()
+        {
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri(BaseApiAdress + "/ereignistypen/list"),
+                Headers =
+                            {
+                                { "accept", "text/plain" },
+                            },
+            };
+            using (var response = await _httpClient.SendAsync(request))
+            {
+                response.EnsureSuccessStatusCode();
+                var body = await response.Content.ReadAsStringAsync();
+                List<EreignisTyp> ereignisTypen = JsonConvert.DeserializeObject<List<EreignisTyp>>(body);
+                return ereignisTypen;
+            }
+
+        }
+
         public async Task CreateEvent(Ereignis ereignis)
         {
             if(ereignis.TorNationId == 0)

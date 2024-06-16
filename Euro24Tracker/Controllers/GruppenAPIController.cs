@@ -44,21 +44,21 @@ namespace Euro24Tracker.Controllers
         }
 
 
-        [HttpPost]
-        [Route("Create")]
-        public async Task<IActionResult> CreateNewMovie([FromBody] Gruppe gruppe)
-        {
-            // specify
+        //[HttpPost]
+        //[Route("Create")]
+        //public async Task<IActionResult> CreateNewMovie([FromBody] Gruppe gruppe)
+        //{
+        //    // specify
 
-            // check in db
-            _context.Gruppen.Add(gruppe);
-            await _context.SaveChangesAsync();
+        //    // check in db
+        //    _context.Gruppen.Add(gruppe);
+        //    await _context.SaveChangesAsync();
 
 
-            // return sth
+        //    // return sth
 
-            return base.Created(); // base ist nicht nötig aber gut zum suchen mit intellisense
-        }
+        //    return base.Created(); // base ist nicht nötig aber gut zum suchen mit intellisense
+        //}
 
 
         #endregion

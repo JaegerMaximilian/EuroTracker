@@ -9,4 +9,16 @@ public partial class AddEventPage : ContentPage
 		InitializeComponent();
 		BindingContext = viewModel;	
 	}
+
+    protected async override void OnAppearing()
+    {
+        base.OnAppearing();
+        if (BindingContext is AddEventViewModel viewModel)
+        {
+            await viewModel.LoadEreignisTypenCommand.ExecuteAsync(null);
+        }
+
+
+
+    }
 }

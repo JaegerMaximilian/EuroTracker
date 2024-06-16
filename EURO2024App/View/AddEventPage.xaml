@@ -9,8 +9,7 @@
              Title="{Binding Title}">
     
     <Shell.BackButtonBehavior>
-        <BackButtonBehavior Command="{Binding BackCommand}"
-                         />
+        <BackButtonBehavior Command="{Binding BackCommand}"/>
     </Shell.BackButtonBehavior>
 
     <ScrollView>
@@ -18,13 +17,22 @@
 
             <Entry Placeholder="Minute" Keyboard="Numeric" x:Name="MinuteEntry" Text="{Binding Minute}" />
         <Entry Placeholder="Kommentar" x:Name="CommentEntry" Text="{Binding Kommentar}" />
-        <Picker Title="Tor für ..."
+
+         <Picker Title="Ereignis-Typ"
+        ItemsSource="{Binding EreignisTypen}"
+        ItemDisplayBinding="{Binding Name}"
+        SelectedItem="{Binding SelectedEreignisTyp}" 
+        Margin="0,0,0,20"/>
+
+            <Picker Title="Tor für ..."
                 ItemsSource="{Binding Game.Nationen}"
                 ItemDisplayBinding="{Binding Name}"
                 SelectedItem="{Binding SelectedNation}" 
-                Margin="100"/>
+                Margin="0,0,0,20"/>
         <!--<Entry Placeholder="Tor Nation Id" Keyboard="Numeric" x:Name="TorNationEntry" Text="{Binding TorNationId}" />-->
-
+        
+            
+           
 
 
             <Button Text="Confirm" Command="{Binding CreateEreignisCommand}"/>

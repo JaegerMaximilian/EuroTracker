@@ -4,6 +4,7 @@ using EURO2024App.Services;
 using EURO2024App.View;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ namespace EURO2024App.ViewModels
     public partial class AddEventViewModel : BaseViewModel
     {
         EuroAPIService euroAPIService;
+        public ObservableCollection<EreignisTyp> EreignisTypen { get; } = new();
         public AddEventViewModel(EuroAPIService euroAPIService)
         {
             this.euroAPIService = euroAPIService;
@@ -27,6 +29,9 @@ namespace EURO2024App.ViewModels
 
         [ObservableProperty]
         string _kommentar;
+
+        [ObservableProperty]
+        EreignisTyp selectedEreignisTyp;
 
         [ObservableProperty]
         Nation selectedNation;
@@ -76,13 +81,31 @@ namespace EURO2024App.ViewModels
             spielereignis.Minute = Minute;
             spielereignis.Kommentar = Kommentar;
             spielereignis.SpielId = Game.Id;
+
             if(selectedNation != null)
             {
                 spielereignis.TorNationId = selectedNation.Id;
             }
+            if(selectedEreignisTyp != null)
+            {
+                spielereignis.EreignisTypId = selectedEreignisTyp.Id;
+            }
             
 
             return spielereignis;
+        }
+
+        [RelayCommand]
+        public async Task LoadEreignisTypen()
+        {
+            List<EreignisTyp> ereignisTypen = new();
+            ereignisTypen = await euroAPIService.GetEreignisTypen();
+
+            foreach (EreignisTyp ereignisTyp in ereignisTypen)
+            {
+                EreignisTypen.Add(ereignisTyp);
+            }
+
         }
 
         [RelayCommand]

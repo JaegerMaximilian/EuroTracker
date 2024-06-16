@@ -65,6 +65,14 @@
                                         <Label Text="':" FontSize="Micro" VerticalTextAlignment="Center" Margin="0,0,10,0"/>
                                     </VerticalStackLayout>
 
+                                    <VerticalStackLayout>
+                                        <Frame WidthRequest="30" HeightRequest="30" Padding="0">
+                                            <Image Source="{Binding EreignisTyp.ImageLink}" WidthRequest="30" HeightRequest="30"/>
+                                        </Frame>
+                                    </VerticalStackLayout>
+
+                                    
+
 
                                     <VerticalStackLayout>
                                         <Label Text="{Binding Kommentar}" FontSize="Micro" VerticalTextAlignment="Center"/>

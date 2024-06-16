@@ -46,8 +46,10 @@ namespace Euro24Tracker.Controllers
 
             var spiele =  await _context.Spiele
                 .Include(e => e.Nationen)
-                .ThenInclude(e => e.Gruppe)
-                .Include(e => e.Ereignisse).ToListAsync();
+                    .ThenInclude(e => e.Gruppe)
+                .Include(e => e.Ereignisse)
+                    .ThenInclude(e => e.EreignisTyp)
+                .ToListAsync();
 
            
 
@@ -63,6 +65,7 @@ namespace Euro24Tracker.Controllers
                 .Include(e => e.Nationen)
                     .ThenInclude(e => e.Gruppe)
                 .Include(e => e.Ereignisse)
+                    .ThenInclude(e => e.EreignisTyp)
                 .FirstOrDefaultAsync();
 
             if (spiel == null) return NotFound();
