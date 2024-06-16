@@ -35,32 +35,15 @@
                                     <Label Text="{Binding Name}" FontSize="Medium" Margin="5,0,0,0"/>
                                 </VerticalStackLayout>
 
-                                <!-- Labels for Spiele, +/-, and Punkte -->
-                                <HorizontalStackLayout VerticalOptions="Center" Grid.Row="1" Margin="0,10,0,0">
-
-                                    <VerticalStackLayout FlexLayout.Basis="40%" Margin="0,0,220,0">
-                                        <Label Text=" " FontSize="Micro"/>
-                                    </VerticalStackLayout>
-                                    <VerticalStackLayout FlexLayout.Basis="20%" Margin="5,0,8,0">
-                                        <Label Text="Spiele" FontSize="Micro"/>
-                                    </VerticalStackLayout>
-                                    <VerticalStackLayout FlexLayout.Basis="20%" Margin="8,0,5,0">
-                                        <Label Text="Torverhältnis" FontSize="Micro"/>
-                                    </VerticalStackLayout>
-                                    <VerticalStackLayout FlexLayout.Basis="20%" Margin="5,0,0,0">
-                                        <Label Text="Punkte" FontSize="Micro"/>
-                                    </VerticalStackLayout>
-
-                                </HorizontalStackLayout>
-
-                                <HorizontalStackLayout VerticalOptions="Center" Grid.Row="2">
+                              
+                                <HorizontalStackLayout VerticalOptions="Center" Grid.Row="1">
 
                                     
 
                                     <CollectionView ItemsSource="{Binding Nationen}" SelectionMode="None">
                                         <CollectionView.ItemTemplate>
                                             <DataTemplate x:DataType="model:Nation">
-                                                <Frame>
+                                                <Frame HeightRequest="90">
                                                     <StackLayout Orientation="Horizontal" VerticalOptions="Center" FlexLayout.Basis="40%">
                                                         <Frame WidthRequest="50" HeightRequest="50" CornerRadius="25" IsClippedToBounds="True" Padding="0">
                                                             <Image Source="{Binding LogoLink}" WidthRequest="50" HeightRequest="50"/>
@@ -75,7 +58,7 @@
                                     <CollectionView ItemsSource="{Binding Nationen}" SelectionMode="None">
                                         <CollectionView.ItemTemplate>
                                             <DataTemplate x:DataType="model:Nation">
-                                                <Frame>
+                                                <Frame HeightRequest="90">
                                                     <StackLayout Orientation="Vertical" HorizontalOptions="Center" FlexLayout.Basis="20%">
                                                         <Label Text="Sp." FontSize="Micro"/>
                                                         <Label Text="{Binding Spiele.Count}" FontSize="Small" VerticalTextAlignment="Center"/>
@@ -88,7 +71,7 @@
                                     <CollectionView ItemsSource="{Binding Nationen}" SelectionMode="None">
                                         <CollectionView.ItemTemplate>
                                             <DataTemplate x:DataType="model:Nation">
-                                                <Frame>
+                                                <Frame HeightRequest="90">
                                                     <StackLayout Orientation="Vertical" HorizontalOptions="Center" FlexLayout.Basis="20%">
                                                         <Label Text="+/-" FontSize="Micro"/>
                                                         <Label Text="{Binding Torverhältnis}" FontSize="Small" VerticalTextAlignment="Center"/>
@@ -101,7 +84,7 @@
                                     <CollectionView ItemsSource="{Binding Nationen}" SelectionMode="None">
                                         <CollectionView.ItemTemplate>
                                             <DataTemplate x:DataType="model:Nation">
-                                                <Frame>
+                                                <Frame HeightRequest="90">
                                                     <StackLayout Orientation="Vertical" HorizontalOptions="Center" FlexLayout.Basis="20%">
                                                         <Label Text="Pkt." FontSize="Micro"/>
                                                         <Label Text="{Binding Punkte}" FontSize="Small" VerticalTextAlignment="Center"/>

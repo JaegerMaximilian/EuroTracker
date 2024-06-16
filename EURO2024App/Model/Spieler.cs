@@ -2,7 +2,7 @@
 using System.Security.Cryptography.X509Certificates;
 
 
-namespace Euro24Tracker.Types
+namespace EURO2024App.Model
 {
     public class Spieler
     {
@@ -14,6 +14,8 @@ namespace Euro24Tracker.Types
         // Navigation Properties
         public int NationId { get; set; }
         public Nation Nation { get; set; } = new Nation();
+
+        public ICollection<Ereignis>? TorEreignisse { get; set; }
 
         public Spieler()
         {

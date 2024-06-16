@@ -58,7 +58,12 @@ namespace Euro24Tracker.Controllers
 
             _context.Ereignisse.Add(ereignis);
 
-            if (ereignis.TorNationId != null)
+           if(ereignis.TorschuetzeId != null)
+            {
+                _context.Spieler.FirstOrDefault(a => a.Id == ereignis.TorschuetzeId).Tore += 1;
+            }
+
+            if (ereignis.TorNationId != null && ereignis.Spiel.Gruppenphase == true)
             {
                 Nation tornation = _context.Nationen.Include(e=>e.Spiele).FirstOrDefault(a => a.Id == ereignis.TorNationId);
                 tornation.Tore = (tornation.Tore == null) ? 1 : (tornation.Tore+=1);

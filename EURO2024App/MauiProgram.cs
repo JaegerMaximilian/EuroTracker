@@ -37,8 +37,8 @@ namespace EURO2024App
             builder.Services.AddSingleton<GruppenViewModel>();
             builder.Services.AddSingleton<GruppenPage>();
 
-
-           
+            builder.Services.AddSingleton<StatistikViewModel>();
+            builder.Services.AddTransient<StatistikPage>();
 
             return builder.Build();
         }

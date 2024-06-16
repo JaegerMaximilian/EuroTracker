@@ -20,8 +20,8 @@
         <RefreshView Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:GamesViewModel}}, Path=ReloadGamesCommand}"
                      Grid.ColumnSpan="2"
                      IsRefreshing="{Binding IsBusy}">
-
-            <CollectionView 
+            <ScrollView>
+                <CollectionView 
                 ItemsSource="{Binding Games}"
                 SelectionMode="None">
                 <CollectionView.ItemTemplate>
@@ -83,6 +83,7 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+                </ScrollView>
         </RefreshView>
     </Grid>
 </ContentPage>

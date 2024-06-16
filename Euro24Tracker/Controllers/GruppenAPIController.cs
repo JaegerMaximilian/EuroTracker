@@ -40,6 +40,8 @@ namespace Euro24Tracker.Controllers
             return await _context.Gruppen
                 .Include(e => e.Nationen)
                     .ThenInclude(e=>e.Spiele)
+                .Include(e => e.Nationen)
+                    .ThenInclude(e => e.Spieler)
                  .ToListAsync();
         }
 

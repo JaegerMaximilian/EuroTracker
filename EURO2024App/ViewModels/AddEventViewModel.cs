@@ -2,7 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using EURO2024App.Services;
 using EURO2024App.View;
-using Euro24Tracker.Types;
+using EURO2024App.Model;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -102,6 +102,10 @@ namespace EURO2024App.ViewModels
             if (SelectedEreignisTyp != null)
             {
                 spielereignis.EreignisTypId = SelectedEreignisTyp.Id;
+            }
+            if (SelectedSpieler != null)
+            {
+                spielereignis.TorschuetzeId = SelectedSpieler.Id;
             }
 
             return spielereignis;
