@@ -52,7 +52,7 @@ namespace Euro24Tracker.Controllers
         public IActionResult Create()
         {
             ViewData["EreignisTypId"] = new SelectList(_context.EreignisTyp, "Id", "Name");
-            ViewData["SpielId"] = new SelectList(_context.Spiele, "Id", "Nationen");
+            ViewData["SpielId"] = new SelectList(_context.Spiele, "Id", "Id");
             ViewData["TorNationId"] = new SelectList(_context.Nationen, "Id", "Name");
             ViewData["TorschuetzeId"] = new SelectList(_context.Spieler, "Id", "Name");
             return View();
@@ -80,7 +80,7 @@ namespace Euro24Tracker.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["EreignisTypId"] = new SelectList(_context.EreignisTyp, "Id", "Name", ereignis.EreignisTypId);
-            ViewData["SpielId"] = new SelectList(_context.Spiele, "Id", "Nationen", ereignis.SpielId);
+            ViewData["SpielId"] = new SelectList(_context.Spiele, "Id", "Id", ereignis.SpielId);
             ViewData["TorNationId"] = new SelectList(_context.Nationen, "Id", "Name", ereignis.TorNationId);
             ViewData["TorschuetzeId"] = new SelectList(_context.Spieler, "Id", "Name", ereignis.TorschuetzeId);
             return View(ereignis);
@@ -100,7 +100,7 @@ namespace Euro24Tracker.Controllers
                 return NotFound();
             }
             ViewData["EreignisTypId"] = new SelectList(_context.EreignisTyp, "Id", "Name", ereignis.EreignisTypId);
-            ViewData["SpielId"] = new SelectList(_context.Spiele, "Id", "Nationen", ereignis.SpielId);
+            ViewData["SpielId"] = new SelectList(_context.Spiele, "Id", "Id", ereignis.SpielId);
             ViewData["TorNationId"] = new SelectList(_context.Nationen, "Id", "Name", ereignis.TorNationId);
             ViewData["TorschuetzeId"] = new SelectList(_context.Spieler, "Id", "Name", ereignis.TorschuetzeId);
             return View(ereignis);
@@ -146,8 +146,9 @@ namespace Euro24Tracker.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            //_context.Nationen.ToList()[0].Name + _context.Nationen.ToList()[1].Name
             ViewData["EreignisTypId"] = new SelectList(_context.EreignisTyp, "Id", "Name", ereignis.EreignisTypId);
-            ViewData["SpielId"] = new SelectList(_context.Spiele, "Id", "Nationen", ereignis.SpielId);
+            ViewData["SpielId"] = new SelectList(_context.Spiele, "Id", "Id", ereignis.SpielId);
             ViewData["TorNationId"] = new SelectList(_context.Nationen, "Id", "Name", ereignis.TorNationId);
             ViewData["TorschuetzeId"] = new SelectList(_context.Spieler, "Id", "Name", ereignis.TorschuetzeId);
             return View(ereignis);

@@ -10,5 +10,15 @@ public partial class EventPage : ContentPage
         BindingContext = viewModel;
     }
 
-   
+    protected async override void OnAppearing()
+    {
+        base.OnAppearing();
+        if (BindingContext is EventViewModel viewModel)
+        {
+            await viewModel.RefreshCommand.ExecuteAsync(null);
+        }
+
+    }
+
+
 }
