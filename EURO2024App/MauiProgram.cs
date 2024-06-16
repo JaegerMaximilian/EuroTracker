@@ -37,6 +37,7 @@ namespace EURO2024App
             builder.Services.AddSingleton<GruppenViewModel>();
             builder.Services.AddSingleton<GruppenPage>();
 
+
            
 
             return builder.Build();
