@@ -48,7 +48,7 @@ namespace Euro24Tracker.Controllers
         // GET: Spieler/Create
         public IActionResult Create()
         {
-            ViewData["NationId"] = new SelectList(_context.Nationen, "Id", "Id");
+            ViewData["NationId"] = new SelectList(_context.Nationen, "Id", "Name");
             return View();
         }
 
@@ -61,11 +61,14 @@ namespace Euro24Tracker.Controllers
         {
             if (ModelState.IsValid)
             {
+                Nation nation = _context.Nationen.FirstOrDefault(e => e.Id == spieler.NationId);
+                spieler.Nation = nation;
+                spieler.NationId = nation.Id;
                 _context.Add(spieler);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["NationId"] = new SelectList(_context.Nationen, "Id", "Id", spieler.NationId);
+            ViewData["NationId"] = new SelectList(_context.Nationen, "Id", "Name", spieler.NationId);
             return View(spieler);
         }
 
@@ -82,7 +85,7 @@ namespace Euro24Tracker.Controllers
             {
                 return NotFound();
             }
-            ViewData["NationId"] = new SelectList(_context.Nationen, "Id", "Id", spieler.NationId);
+            ViewData["NationId"] = new SelectList(_context.Nationen, "Id", "Name", spieler.NationId);
             return View(spieler);
         }
 
@@ -102,6 +105,9 @@ namespace Euro24Tracker.Controllers
             {
                 try
                 {
+                    Nation nation = _context.Nationen.FirstOrDefault(e => e.Id == spieler.NationId);
+                    spieler.Nation = nation;
+                    spieler.NationId = nation.Id;
                     _context.Update(spieler);
                     await _context.SaveChangesAsync();
                 }
@@ -118,7 +124,7 @@ namespace Euro24Tracker.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["NationId"] = new SelectList(_context.Nationen, "Id", "Id", spieler.NationId);
+            ViewData["NationId"] = new SelectList(_context.Nationen, "Id", "Name", spieler.NationId);
             return View(spieler);
         }
 
