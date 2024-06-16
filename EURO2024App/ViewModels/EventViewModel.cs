@@ -44,7 +44,7 @@ namespace EURO2024App.ViewModels
         [RelayCommand]
         public async Task Refresh(Spiel game)
         {
-            _game = await euroAPIservice.GetSpiel(game.Id);
+            _game = await euroAPIservice.GetSpiel(Game.Id);
             _game.GruppeString = _game.Nationen.ElementAtOrDefault(0).Gruppe.Name;
             foreach (var nation in _game.Nationen)
             {

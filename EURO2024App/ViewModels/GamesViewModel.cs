@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using EURO2024App.Services;
 using EURO2024App.View;
+using EURO2024App.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
