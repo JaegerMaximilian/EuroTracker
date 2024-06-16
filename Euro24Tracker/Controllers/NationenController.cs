@@ -48,13 +48,7 @@ namespace Euro24Tracker.Controllers
         // GET: Nationen/Create
         public IActionResult Create()
         {
-            ViewBag.Nationen = _context.Gruppen.Select(a => new SelectListItem
-            {
-                Value = a.Id.ToString(),
-                Text = a.Name
-            }).ToList();
-
-            //ViewData["GruppeId"] = new SelectList(_context.Gruppen, "Id", "Id");
+            ViewData["GruppeId"] = new SelectList(_context.Gruppen, "Id", "Name");
             return View();
         }
 
@@ -63,17 +57,18 @@ namespace Euro24Tracker.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ShortName,Name,LogoLink,Punkte,Tore,Gegentore,Torverhältnis,GruppeId")] Nation nation, int SelectedGruppeId)
+        public async Task<IActionResult> Create([Bind("Id,ShortName,Name,LogoLink,Punkte,Tore,Gegentore,Torverhältnis,GruppeId")] Nation nation)
         {
             if (ModelState.IsValid)
             {
-                nation.GruppeId = SelectedGruppeId;
-                nation.Gruppe = _context.Gruppen.FirstOrDefault(a => a.Id == SelectedGruppeId);
+                Gruppe gruppe = _context.Gruppen.FirstOrDefault(m => m.Id == nation.GruppeId);
+                nation.Gruppe = gruppe;
+                nation.GruppeId = gruppe.Id;
                 _context.Add(nation);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GruppeId"] = new SelectList(_context.Gruppen, "Id", "Id", nation.GruppeId);
+            ViewData["GruppeId"] = new SelectList(_context.Gruppen, "Id", "Name", nation.GruppeId);
             return View(nation);
         }
 
@@ -90,20 +85,7 @@ namespace Euro24Tracker.Controllers
             {
                 return NotFound();
             }
-
-            ViewBag.GruppenNationen = _context.Nationen.Include(e=>e.Gruppe).Select(a => new SelectListItem
-            {
-                Value = a.Id.ToString(),
-                Text = a.GruppeId.ToString(),
-            }).ToList();
-
-            ViewBag.Gruppen = _context.Gruppen.Select(a => new SelectListItem
-            {
-                Value = a.Id.ToString(),
-                Text = a.Name
-            }).ToList();
-
-            //ViewData["GruppeId"] = new SelectList(_context.Gruppen, "Id", "Id", nation.GruppeId);
+            ViewData["GruppeId"] = new SelectList(_context.Gruppen, "Id", "Name", nation.GruppeId);
             return View(nation);
         }
 
@@ -112,7 +94,7 @@ namespace Euro24Tracker.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ShortName,Name,LogoLink,Punkte,Tore,Gegentore,Torverhältnis,GruppeId")] Nation nation, int SelectedGruppeId)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ShortName,Name,LogoLink,Punkte,Tore,Gegentore,Torverhältnis,GruppeId")] Nation nation)
         {
             if (id != nation.Id)
             {
@@ -123,8 +105,9 @@ namespace Euro24Tracker.Controllers
             {
                 try
                 {
-                    nation.GruppeId = SelectedGruppeId;
-                    nation.Gruppe = _context.Gruppen.FirstOrDefault(a => a.Id == SelectedGruppeId);
+                    Gruppe gruppe = _context.Gruppen.FirstOrDefault(m => m.Id == nation.GruppeId);
+                    nation.Gruppe = gruppe;
+                    nation.GruppeId = gruppe.Id;
                     _context.Update(nation);
                     await _context.SaveChangesAsync();
                 }
@@ -141,7 +124,7 @@ namespace Euro24Tracker.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GruppeId"] = new SelectList(_context.Gruppen, "Id", "Id", nation.GruppeId);
+            ViewData["GruppeId"] = new SelectList(_context.Gruppen, "Id", "Name", nation.GruppeId);
             return View(nation);
         }
 
