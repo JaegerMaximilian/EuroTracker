@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Euro24Tracker.Types;
+using System.ComponentModel.DataAnnotations;
 
 
 namespace EURO2024App.Model
@@ -21,6 +22,7 @@ namespace EURO2024App.Model
         public int GruppeId { get; set; }
         public Gruppe Gruppe { get; set; }
 
+        public ICollection<Spieler>? Spieler { get; set; } = new List<Spieler>();
         public ICollection<Ereignis>? TorEreginisse { get; set; }
         public ICollection<Spiel>? Spiele { get; set; }
 

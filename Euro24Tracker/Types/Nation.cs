@@ -21,8 +21,11 @@ namespace Euro24Tracker.Types
         public int? GruppeId { get; set; }
         public Gruppe? Gruppe { get; set; } = new Gruppe();
 
+        public ICollection<Spieler>? Spieler { get; set; } = new List<Spieler>();
         public ICollection<Ereignis>? TorEreginisse { get; set; } = new List<Ereignis>();
         public ICollection<Spiel>? Spiele { get; set; } = new List<Spiel>();
+
+
 
         public Nation()
         {

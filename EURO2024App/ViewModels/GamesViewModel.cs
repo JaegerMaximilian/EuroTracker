@@ -37,15 +37,22 @@ namespace EURO2024App.ViewModels
                 IsRefreshing = true;
                 List<Spiel> games = new();
                 games = await euroAPIservice.GetSpiele();
-                games.OrderBy(game => game.Datetime).OrderBy(game => game.Nationen.ElementAtOrDefault(0).Gruppe).ToList();
+                games.OrderBy(game => game.Datetime); //.OrderBy(game => game.Nationen.ElementAtOrDefault(0).Gruppe).ToList();
 
                 foreach (Spiel game in games)
                 {
                     game.GruppeString = game.Nationen.ElementAtOrDefault(0).Gruppe.Name;
-                    foreach (var nation in game.Nationen)
+                    if(game.Ereignisse != null)
                     {
-                        nation.ToreImSpiel = nation.TorEreginisse.Count(e => e.SpielId == game.Id);
+                        if (game.Ereignisse.Count() != 0)
+                        {
+                            foreach (var nation in game.Nationen)
+                            {
+                                nation.ToreImSpiel = nation.TorEreginisse.Count(e => e.SpielId == game.Id);
+                            }
+                        }
                     }
+                    
                     Games.Add(game);
                 }
 

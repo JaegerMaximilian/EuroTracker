@@ -30,6 +30,12 @@ namespace Euro24Tracker.Data
                 .WithMany(g => g.Nationen)
                 .HasForeignKey(n => n.GruppeId);
 
+            // 1:n Beziehung zwischen Spieler und Nation
+            modelBuilder.Entity<Spieler>()
+                .HasOne(n => n.Nation)
+                .WithMany(g => g.Spieler)
+                .HasForeignKey(n => n.NationId);
+
             // n:m Beziehung zwischen Spiel und Nation
             modelBuilder.Entity<SpielNation>()
                 .HasKey(sn => new { sn.SpielId, sn.NationId });
@@ -52,5 +58,6 @@ namespace Euro24Tracker.Data
                 .HasForeignKey(e => e.EreignisTypId);
         }
         public DbSet<Euro24Tracker.Types.EreignisTyp> EreignisTyp { get; set; } = default!;
+        public DbSet<Euro24Tracker.Types.Spieler> Spieler { get; set; } = default!;
     }
 }
