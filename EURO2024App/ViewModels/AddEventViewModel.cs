@@ -66,7 +66,7 @@ namespace EURO2024App.ViewModels
 
                 await Shell.Current.GoToAsync(nameof(EventPage), true, new Dictionary<string, object>
                 {
-                    { "Game", spiel }
+                    { "Game", Game }
                 });
             }
             catch
@@ -80,7 +80,7 @@ namespace EURO2024App.ViewModels
 
                 await Shell.Current.GoToAsync(nameof(EventPage), true, new Dictionary<string, object>
                 {
-                    { "Game", spiel }
+                    { "Game", Game }
                 });
             }
         }
