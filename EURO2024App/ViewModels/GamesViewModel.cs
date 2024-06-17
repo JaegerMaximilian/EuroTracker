@@ -38,7 +38,7 @@ namespace EURO2024App.ViewModels
                 IsRefreshing = true;
                 List<Spiel> games = new();
                 games = await euroAPIservice.GetSpiele();
-                games.OrderBy(game => game.Datetime); //.OrderBy(game => game.Nationen.ElementAtOrDefault(0).Gruppe).ToList();
+                games = games.OrderBy(game => game.Datetime).ToList(); //.OrderBy(game => game.Nationen.ElementAtOrDefault(0).Gruppe).ToList();
 
                 foreach (Spiel game in games)
                 {
