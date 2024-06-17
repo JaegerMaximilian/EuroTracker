@@ -38,13 +38,16 @@ namespace EURO2024App.ViewModels
                 List<Gruppe> gruppen = new();
                 gruppen = await euroAPIservice.GetGruppen();
 
-
                 foreach (Gruppe gruppe in gruppen)
                 {
-                   
-                    gruppe.Nationen.OrderByDescending(e => e.Punkte).OrderBy(e => e.Torverhältnis);
+
+                    gruppe.Nationen = gruppe.Nationen
+                        .OrderByDescending(e => e.Punkte)
+                        .ThenByDescending(e => e.Torverhältnis)
+                        .ToList(); 
                     Gruppen.Add(gruppe);
                 }
+                OnPropertyChanged(nameof(Gruppen));
 
             }
             catch (Exception ex)

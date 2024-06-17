@@ -1,58 +1,52 @@
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Euro24Tracker.Data;
-using System.Text.Json.Serialization;
 using Euro24Tracker.Controllers;
-using Microsoft.Extensions.Configuration;
-using System.IO;
+using System;
 
 namespace Euro24Tracker
 {
-
     public class Program
     {
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
             builder.Services.AddDbContext<Euro24TrackerContext>(options =>
                 options.UseSqlite(builder.Configuration.GetConnectionString("Euro24TrackerContext") ?? throw new InvalidOperationException("Connection string 'Euro24TrackerContext' not found.")));
 
-            // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            // API GENERATION SWAGGER (MIT NUGGET PACKAGE)
-
+            // Add Swagger
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddControllers().AddJsonOptions(options =>
             {
-                options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+                options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
                 options.JsonSerializerOptions.WriteIndented = true;
             });
 
-            builder.Services.AddSingleton<StartupUrlPrinter>();
-
-            // END API
-
-
             
+            var customUrl = "http://localhost:7094"; 
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            }
+            else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
-            // API
-
-            app.UseSwagger();
-            app.UseSwaggerUI();
-
-            // END EPI
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -65,32 +59,8 @@ namespace Euro24Tracker
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
-            
-
-            //string relativePath = "EURO2024App/port.txt";
-            //string port = app.Configuration.AsEnumerable().ToArray()[94].ToString().Split(',')[1].Trim(new char[] { ' ', ']' });
-            //string currentDirectory = Environment.CurrentDirectory;
-            //string parentDirectory = Directory.GetParent(currentDirectory).FullName;
-
-            //string fullPath = Path.Combine(parentDirectory, relativePath);
-
-            //File.WriteAllText(fullPath, port);
-
-       
-
-
-            //var baseUrl = string.Format("{ 0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content(“~”));
-
-            //var urlPrinter = app.Services.GetRequiredService<StartupUrlPrinter>();
-            //urlPrinter.PrintUrls();
-
-
-
-
+            // Set the URLs the application should listen on
             app.Run();
-
         }
     }
-
-    
 }

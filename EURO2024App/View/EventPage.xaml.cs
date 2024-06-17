@@ -13,11 +13,10 @@ public partial class EventPage : ContentPage
     protected async override void OnAppearing()
     {
         base.OnAppearing();
-        //IsBusy = true;
-        //if (BindingContext is EventViewModel viewModel)
-        //{
-        //    await viewModel.RefreshCommand.ExecuteAsync(null);
-        //}
+        if (BindingContext is EventViewModel viewModel)
+        {
+            await viewModel.RefreshCommand.ExecuteAsync(null);
+        }
 
     }
 

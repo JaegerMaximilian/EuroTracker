@@ -70,7 +70,7 @@ namespace Euro24Tracker.Controllers
                         .ThenInclude(n => n.TorEreignisse)
                 .Include(e => e.Ereignisse)
                     .ThenInclude(e => e.EreignisTyp)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(e=> e.Id == id);
 
             if (spiel == null) return NotFound();
 

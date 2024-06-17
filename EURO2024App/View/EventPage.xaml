@@ -12,84 +12,108 @@
         <BackButtonBehavior Command="{Binding BackToGamesCommand}"
                  />
     </Shell.BackButtonBehavior>
+    <Grid
+     ColumnDefinitions="*,*"
+     ColumnSpacing="5"
+     RowDefinitions="*,Auto"
+     RowSpacing="50">
 
-    <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsBusy}" CommandParameter="{Binding Game}">
-        <ScrollView>
-        <StackLayout Margin="10">
+        <RefreshView Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:EventViewModel}}, Path=RefreshCommand}"
+                 IsRefreshing="{Binding IsBusy}"
+                 CommandParameter="{Binding Game}"
+                 Grid.ColumnSpan="2">
 
-            <!-- FlexLayout for side-by-side CollectionViews -->
-            <FlexLayout Direction="Row" AlignItems="Start" JustifyContent="SpaceBetween">
+            <ScrollView>
+                <StackLayout Margin="10">
 
-                <!-- First CollectionView -->
-                <CollectionView FlexLayout.Basis="30%"
+                    <!-- FlexLayout for side-by-side CollectionViews -->
+                    <FlexLayout Direction="Row" AlignItems="Start" JustifyContent="SpaceBetween">
+
+                        <HorizontalStackLayout Spacing="10">
+                            <!-- First CollectionView -->
+                            <CollectionView FlexLayout.Basis="30%"
                                 ItemsSource="{Binding Game.Nationen}"
                                 SelectionMode="None">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="model:Nation">
-                            <StackLayout Orientation="Horizontal" VerticalOptions="Center">
-                                <Frame WidthRequest="30" HeightRequest="30" CornerRadius="15" Padding="0">
-                                        <Image Source="{Binding LogoLink}" WidthRequest="30" HeightRequest="30" Aspect="AspectFill"/>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="model:Nation">
+                                        <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                                            <Frame WidthRequest="30" HeightRequest="30" CornerRadius="15" Padding="0">
+                                                <Image Source="{Binding LogoLink}" WidthRequest="30" HeightRequest="30" Aspect="AspectFill"/>
+                                            </Frame>
+                                            <Label Text="{Binding Name}" FontSize="Small" VerticalOptions="Center" Margin="10,0,0,0"/>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+
+                            <!-- Second CollectionView -->
+                            <CollectionView FlexLayout.Basis="70%"
+                                ItemsSource="{Binding Game.Nationen}"
+                                SelectionMode="None">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="model:Nation">
+                                        <StackLayout Orientation="Horizontal" VerticalOptions="Start">
+                                            <Label Text="{Binding ToreImSpiel}" FontSize="Small" WidthRequest="30" HeightRequest="30" VerticalOptions="Start" Margin="10,0,0,0"/>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+
+                            <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+                                <Label Text="|" FontSize="Title" VerticalTextAlignment="Center"/>
+                            </StackLayout>
+
+                            <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+                                <Label Text="Start" FontSize="Micro"/>
+                                <Label Text="{Binding Game.Datetime}" FontSize="Small" VerticalTextAlignment="Center"/>
+                            </StackLayout>
+
+                            <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+                                <Label Text="Stadion" FontSize="Micro"/>
+                                <Label Text="{Binding Game.Stadion}" FontSize="Small" VerticalTextAlignment="Center"/>
+                            </StackLayout>
+                        </HorizontalStackLayout >
+                    </FlexLayout>
+
+                    <!-- Third CollectionView -->
+                    <CollectionView ItemsSource="{Binding Game.Ereignisse}" SelectionMode="None">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="model:Ereignis">
+                                <Frame>
+                                    <HorizontalStackLayout>
+                                        <VerticalStackLayout>
+                                            <Label Text="{Binding Minute}" FontSize="Micro" VerticalTextAlignment="Center"/>
+                                        </VerticalStackLayout>
+
+                                        <VerticalStackLayout>
+                                            <Label Text="':" FontSize="Micro" VerticalTextAlignment="Center" Margin="0,0,10,0"/>
+                                        </VerticalStackLayout>
+
+                                        <VerticalStackLayout>
+                                            <Frame WidthRequest="30" HeightRequest="30" Padding="0">
+                                                <Image Source="{Binding EreignisTyp.ImageLink}" WidthRequest="30" HeightRequest="30" Aspect="AspectFill"/>
+                                            </Frame>
+                                        </VerticalStackLayout>
+
+
+
+
+                                        <VerticalStackLayout>
+                                            <Label Text="{Binding Kommentar}" FontSize="Micro" VerticalTextAlignment="Center"/>
+                                        </VerticalStackLayout>
+                                    </HorizontalStackLayout>
                                 </Frame>
-                                <Label Text="{Binding Name}" FontSize="Small" VerticalOptions="Center" Margin="10,0,0,0"/>
-                            </StackLayout>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
 
-                <!-- Second CollectionView -->
-                <CollectionView FlexLayout.Basis="70%"
-                                ItemsSource="{Binding Game.Nationen}"
-                                SelectionMode="None">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="model:Nation">
-                            <StackLayout Orientation="Horizontal" VerticalOptions="Start">
-                                <Label Text="{Binding ToreImSpiel}" FontSize="Small" WidthRequest="30" HeightRequest="30" VerticalOptions="Start" Margin="10,0,0,0"/>
-                            </StackLayout>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                    <!-- Add Event Button -->
+                    <Button Text="Add Event" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:EventViewModel}}, Path=AddEventCommand}" Margin="0,10,0,0"/>
 
-            </FlexLayout>
+                </StackLayout>
+            </ScrollView>
+        </RefreshView>
+    </Grid>
 
-            <!-- Third CollectionView -->
-            <CollectionView ItemsSource="{Binding Game.Ereignisse}" SelectionMode="None">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="model:Ereignis">
-                            <Frame>
-                                <HorizontalStackLayout>
-                                    <VerticalStackLayout>
-                                        <Label Text="{Binding Minute}" FontSize="Micro" VerticalTextAlignment="Center"/>
-                                    </VerticalStackLayout>
-                                    
-                                    <VerticalStackLayout>
-                                        <Label Text="':" FontSize="Micro" VerticalTextAlignment="Center" Margin="0,0,10,0"/>
-                                    </VerticalStackLayout>
-
-                                    <VerticalStackLayout>
-                                        <Frame WidthRequest="30" HeightRequest="30" Padding="0">
-                                            <Image Source="{Binding EreignisTyp.ImageLink}" WidthRequest="30" HeightRequest="30" Aspect="AspectFill"/>
-                                        </Frame>
-                                    </VerticalStackLayout>
-
-                                    
-
-
-                                    <VerticalStackLayout>
-                                        <Label Text="{Binding Kommentar}" FontSize="Micro" VerticalTextAlignment="Center"/>
-                                    </VerticalStackLayout>
-                                </HorizontalStackLayout>
-                            </Frame>
-                        </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-
-            <!-- Add Event Button -->
-            <Button Text="Add Event" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:EventViewModel}}, Path=AddEventCommand}" Margin="0,10,0,0"/>
-
-        </StackLayout>
-    </ScrollView>
-    </RefreshView>
-
-    
 
 </ContentPage>

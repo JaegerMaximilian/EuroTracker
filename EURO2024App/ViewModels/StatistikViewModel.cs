@@ -1,9 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using EURO2024App.Services;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using EURO2024App.Services;
 using EURO2024App.View;
 using System;
 using System.Collections.Generic;
@@ -20,13 +17,10 @@ namespace EURO2024App.ViewModels
         public ObservableCollection<Nation> Nationen { get; } = new();
         public ObservableCollection<Spieler> Spieler { get; } = new();
 
-
-
-        private EuroAPIService euroAPIservice;
+        private readonly EuroAPIService euroAPIservice;
 
         public StatistikViewModel(EuroAPIService euroAPIservice)
         {
-
             this.euroAPIservice = euroAPIservice;
             //IsBusy = true;
         }
@@ -34,29 +28,47 @@ namespace EURO2024App.ViewModels
         [RelayCommand]
         async Task GetNationenAndSpieler()
         {
-
             //IsBusy = true;
-            List<Gruppe> gruppen = new();
-            gruppen = await euroAPIservice.GetGruppen();
+            List<Gruppe> gruppen = await euroAPIservice.GetGruppen();
 
+            List<Nation> tempNationen = new();
+            List<Spieler> tempSpieler = new();
 
             foreach (Gruppe gruppe in gruppen)
             {
                 foreach (Nation nation in gruppe.Nationen)
                 {
-                    Nationen.Add(nation);
+                    tempNationen.Add(nation);
                     foreach (Spieler spieler in nation.Spieler)
                     {
-                        Spieler.Add(spieler);
+                        tempSpieler.Add(spieler);
                     }
                 }
             }
-            Nationen.OrderByDescending(e => e.Punkte).OrderBy(e => e.Torverhältnis);
-            Spieler.OrderByDescending(e => e.Tore);
+
+            // Sort the collections
+            var sortedNationen = tempNationen
+                .OrderByDescending(e => e.Punkte)
+                .ThenByDescending(e => e.Torverhältnis)
+                .ToList();
+
+            var sortedSpieler = tempSpieler
+                .OrderByDescending(e => e.Tore)
+                .ToList();
+
+            // Clear the existing collections and add the sorted items
+            Nationen.Clear();
+            foreach (var nation in sortedNationen)
+            {
+                Nationen.Add(nation);
+            }
+
+            Spieler.Clear();
+            foreach (var spieler in sortedSpieler)
+            {
+                Spieler.Add(spieler);
+            }
         }
-
-       
-
 
         [RelayCommand]
         async Task ReloadNationen()
@@ -65,6 +77,5 @@ namespace EURO2024App.ViewModels
             await GetNationenAndSpieler();
             IsBusy = false;
         }
-
     }
 }

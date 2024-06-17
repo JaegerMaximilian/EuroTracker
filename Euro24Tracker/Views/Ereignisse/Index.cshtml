@@ -42,17 +42,22 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Kommentar)
             </td>
+                <td>
+                    @foreach (var item2 in item.Spiel.Nationen.ToArray())
+                    {
+
+                        @Html.DisplayFor(modelItem2 => item2.ShortName)
+                        <span>  </span>
+                    }
+                </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Spiel.Id)
+                @Html.DisplayFor(modelItem => item.EreignisTyp.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.EreignisTyp.Id)
+                @Html.DisplayFor(modelItem => item.TorNation.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TorNation.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Torschuetze.Id)
+                @Html.DisplayFor(modelItem => item.Torschuetze.Name)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

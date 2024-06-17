@@ -109,7 +109,7 @@
             <Frame>
                 <StackLayout Orientation="Horizontal" VerticalOptions="Center" FlexLayout.Basis="40%">
                     <Label Text="Name" FontSize="Small" VerticalOptions="Center"/>
-                    <Label Text="Tore" FontSize="Small" VerticalOptions="Center" Margin="40,0,0,0"/>
+                    <Label Text="Tore" FontSize="Small" VerticalOptions="Center" Margin="80,0,0,0"/>
                 </StackLayout>
             </Frame>
             <CollectionView ItemsSource="{Binding Spieler}" SelectionMode="None">

@@ -16,19 +16,13 @@ namespace Euro24Tracker.Types
         public ICollection<Nation> Nationen { get; set; } = new List<Nation>();
         public ICollection<Ereignis>? Ereignisse { get; set; } = new List<Ereignis>();
 
-        //public string? GameName
-        //{
-        //    get
-        //    {
-        //        if (Nationen.Count >= 2)
-        //        {
-        //            var firstNation = Nationen.ElementAt(0).Name;
-        //            var secondNation = Nationen.ElementAt(1).Name;
-        //            return $"{firstNation} vs {secondNation}";
-        //        }
-        //        return "Nations not available";
-        //    }
-        //}
+        public string? Description
+        {
+            get
+            {
+                return ToString();
+            }
+        }
 
         public Spiel()
         {
@@ -38,7 +32,22 @@ namespace Euro24Tracker.Types
 
         }
 
-    }
+        public override string ToString()
+        {
+                if (Nationen.Count >= 2)
+                {
+                    string result = $"{Nationen.ToList()[0].Name} : {Nationen.ToList()[1].Name}";
+                    return result;
+                }
+            else
+            {
+                return "No Nations";
+            }
+
+        }
+        }
+
+   
 
 
 }
